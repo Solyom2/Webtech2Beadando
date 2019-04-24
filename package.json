@@ -15,7 +15,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongodb": "^3.2.3",
-    "app-root-path": "^2.2.1",
-    "assert": "^1.4.1"
+    "assert": "^1.4.1",
+    "winston": "^3.2.1"
   }
 }

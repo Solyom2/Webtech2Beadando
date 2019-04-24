@@ -1,15 +1,16 @@
 const express = require("express");
-const bodyParser = require('body-parser');
 
 var app = express();
 const port = 8080;
 
-var dao = require("./dao/shutterDao");
+const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 
+const customerController = require("./controller/customerController");
+app.use("/", customerController);
 
 app.listen(port, () => {
-    dao.list();
     console.log(`Server is listening on ${port}`);
 });
