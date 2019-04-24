@@ -1,8 +1,15 @@
-var express = require("express");
+const express = require("express");
+const bodyParser = require('body-parser');
+
 var app = express();
 const port = 8080;
-var bodyParser = require('body-parser');
+
+var dao = require("./dao/shutterDao");
+
+app.use(bodyParser.json());
+
 
 app.listen(port, () => {
-    console.log(`Server is listening on ${port}`)
+    dao.list();
+    console.log(`Server is listening on ${port}`);
 });
