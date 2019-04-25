@@ -51,7 +51,7 @@ function createOrder(order, callback) {
 
         db.collection(MongoConfig.database.orderCollection).insertOne(order, function(err, res) {
             if (err) throw err;
-            console.log("1 document inserted");
+            console.log("Order inserted to database");
             callback(res);
         });
         client.close();

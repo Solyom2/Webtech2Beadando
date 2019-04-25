@@ -3,19 +3,19 @@ var router = express.Router();
 
 const service = require("../service/customerService");
 
-router.get("/createOrder", (req, res) => {
-    //TODO req.body ureset ad vissza {}
-    //console.log(req.query);
+router.post("/createOrder", (req, res) => {
     console.log(req.body);
     service.createOrder(
         {
+            id: req.body['id'],
             customername: req.body['customername'],
             address: req.body['address'],
             windowlength: req.body['windowlength'],
             windowwidth: req.body['windowwidth'],
             shuttertype: req.body['shuttertype'],
             shuttercolor: req.body['shuttercolor'],
-            quantity: req.body['quantity']
+            quantity: req.body['quantity'],
+            paid: false
         },
     /*service.createOrder(
         {
