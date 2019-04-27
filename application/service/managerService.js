@@ -6,6 +6,18 @@ function listAllOrder(callback) {
     });
 }
 
+function listReadyOrders(callback) {
+    dao.listReadyOrders((orders) => {
+        callback(orders);
+    });
+}
+
+function checkPayments(callback) {
+    dao.checkPayments((orders) => {
+        callback(orders);
+    });
+}
+
 function arrangeInstallation(data, callback) {
     dao.arrangeInstallation(data, (response) => {
         callback(response);
@@ -13,5 +25,8 @@ function arrangeInstallation(data, callback) {
 }
 
 module.exports = {
-    listAllOrder, arrangeInstallation
+    listAllOrder,
+    listReadyOrders,
+    checkPayments,
+    arrangeInstallation
 }

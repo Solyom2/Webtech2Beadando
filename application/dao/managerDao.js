@@ -35,6 +35,20 @@ function listAllOrder(callback) {
     });
 }
 
+function listReadyOrders(callback) {
+    var projection = {projection: {_id: 0}};
+    find({assembled: true}, projection, (result) => {
+        callback(result)
+    });
+}
+
+function checkPayments(callback) {
+    var projection = {projection: {_id: 0, customername: 1, address: 1, price: 1}};
+    find({}, projection, (result) => {
+        callback(result)
+    });
+}
+
 function arrangeInstallation(data, callback) {
     var client = new MongoClient(MongoConfig.database.url, MongoConfig.config);
     client.connect((err) => {
@@ -60,5 +74,5 @@ function arrangeInstallation(data, callback) {
 }
 
 module.exports = {
-    listAllOrder, arrangeInstallation
+    listAllOrder, listReadyOrders, checkPayments, arrangeInstallation
 }

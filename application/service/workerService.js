@@ -1,7 +1,7 @@
 const dao = require("../dao/workerDao");
 
-function listOrders(callback) {
-    dao.listOrders((orders) => {
+function listUnassembledOrders(callback) {
+    dao.listUnassembledOrders((orders) => {
         callback(orders);
     });
 }
@@ -19,5 +19,7 @@ function assembleShutter(id, callback) {
 }
 
 module.exports = {
-    listOrders, listParts, assembleShutter
+    listUnassembledOrders,
+    listParts,
+    assembleShutter
 }

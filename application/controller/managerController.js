@@ -12,6 +12,24 @@ router.get("/listAllOrder", (req, res) => {
         })
 });
 
+router.get("/listReadyOrders", (req, res) => {
+    service.listReadyOrders((response) => {
+            res.status(200).send(response);
+        },
+        (cause) => {
+            res.status(400).send(cause);
+        })
+});
+
+router.get("/checkPayments", (req, res) => {
+    service.checkPayments((response) => {
+            res.status(200).send(response);
+        },
+        (cause) => {
+            res.status(400).send(cause);
+        })
+});
+
 router.post('/arrangeInstallation', (req, res) => {
     if (req.body.id) {
         if (req.body.worker) {
@@ -33,6 +51,18 @@ router.post('/arrangeInstallation', (req, res) => {
             res.status(400).send('Wrong worker');
     } else
         res.status(400).send('Wrong ID');
+});
+
+router.get('/createInvoice', (req, res) => {
+        service.createInvoice(
+            req.query.name,
+            (success) => {
+                if (success === true) {
+                    res.status(200).send("Invoice Created")
+                } else if (success === false) {
+                    res.status(400).send("Error");
+                }
+        });
 });
 
 module.exports = router;

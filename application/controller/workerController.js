@@ -3,8 +3,8 @@ var router = express.Router();
 
 const service = require("../service/workerService");
 
-router.get("/listOrders", (req, res) => {
-    service.listOrders((response) => {
+router.get("/listUnassembledOrders", (req, res) => {
+    service.listUnassembledOrders((response) => {
             res.status(200).send(response);
         },
         (cause) => {

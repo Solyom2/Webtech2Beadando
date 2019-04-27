@@ -28,9 +28,9 @@ function find(findParams, projection, callback) {
     });
 }
 
-function listOrders(callback) {
+function listUnassembledOrders(callback) {
     var projection = {projection: {_id: 0}};
-    find({}, projection, (result) => {
+    find({assembled: false}, projection, (result) => {
         callback(result)
     });
 }
@@ -64,5 +64,5 @@ function assembleShutter(id, callback) {
 }
 
 module.exports = {
-    listOrders, listParts, assembleShutter
+    listUnassembledOrders, listParts, assembleShutter
 }
