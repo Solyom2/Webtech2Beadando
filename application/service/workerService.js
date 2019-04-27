@@ -8,10 +8,16 @@ function listOrders(callback) {
 
 function listParts(id, callback) {
     dao.listParts(id, (result) => {
-        callback(result)
+        callback(result);
+    })
+}
+
+function assembleShutter(id, callback) {
+    dao.assembleShutter(id, (response) => {
+        callback(response);
     })
 }
 
 module.exports = {
-    listOrders, listParts
+    listOrders, listParts, assembleShutter
 }

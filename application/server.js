@@ -6,13 +6,15 @@ const port = 8080;
 
 const bodyParser = require("body-parser");
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const customerController = require("./controller/customerController");
 const workerController = require("./controller/workerController");
+const managerController = require("./controller/managerController");
 app.use("/", customerController);
-//app.use("/", workerController);
+app.use("/", workerController);
+app.use("/", managerController);
 
 app.use(express.static('public'));
 

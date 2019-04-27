@@ -27,4 +27,19 @@ router.get("/listParts", (req, res) => {
     }
 });
 
+router.post("/assembleShutter", (req, res) => {
+    if(req.body.id) {
+        service.assembleShutter(req.body.id,
+            () => {
+                res.status(200).send("Shutter assembled")
+            },
+            (cause) => {
+                res.status(400).send(cause)
+            });
+    }
+    else {
+        res.status(400).send("Wrong ID");
+    }
+});
+
 module.exports = router;

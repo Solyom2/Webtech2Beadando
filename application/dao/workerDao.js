@@ -36,12 +36,33 @@ function listOrders(callback) {
 }
 
 function listParts(id, callback) {
+    //TODO szám alapján nem lehet keresni, stringgel igen id='1' customername='Nagy Béla'
     var projection = {projection: {_id: 0, parts: 1}};
-    find({id: id}, projection, (result) => {
+    find({id: parseInt(id)}, projection, (result) => {
         callback(result);
     });
 }
 
+function assembleShutter(id, callback) {
+    var client = new MongoClient(MongoConfig.database.url, MongoConfig.config);
+    client.connect((err) => {
+        assert.strictEqual(null, err);
+
+        var db = client.db(MongoConfig.database.databaseName);
+        var collection = db.collection(MongoConfig.database.orderCollection);
+
+        collection.updateOne({id: id}, {
+            $set: {
+                assembled: true
+            }
+        }, function (err, docs) {
+            assert.strictEqual(err, null);
+            callback(docs);
+        });
+        client.close();
+    });
+}
+
 module.exports = {
-    listOrders, listParts
+    listOrders, listParts, assembleShutter
 }

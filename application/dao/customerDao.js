@@ -32,22 +32,6 @@ function createOrder(order, callback) {
     client.connect((err) => {
         if (err) throw err;
         var db = client.db(MongoConfig.database.databaseName);
-        /*var order = {
-            customername: "Nagy Béla",
-            address: "Kazinczy utca 3.",
-            windowlength: 150,
-            windowwidth: 200,
-            shuttertype: "plastic",
-            shuttercolor: "brown",
-            quantity: 2,
-            price: 10000,
-            installation: {
-                worker : "Béla",
-                appointment: "2019-04-25",
-                finished: false
-            },
-            paid: false
-        };*/
 
         db.collection(MongoConfig.database.orderCollection).insertOne(order, function(err, res) {
             if (err) throw err;
