@@ -17,20 +17,25 @@ router.post("/createOrder", (req, res) => {
             quantity: req.body.quantity,
             assembled: false
         },
-        /*service.createOrder(
-            {
-                customername: req.query.customername,
-                address: req.query.address,
-                windowlength: req.query.windowlength,
-                windowwidth: req.query.windowwidth,
-                shuttertype: req.query.shuttertype,
-                shuttercolor: req.query.shuttercolor,
-                quantity: req.query.quantity
-            },*/
         () => {
             res.status(200).send("Order processed!")
         })
 })
+
+router.get("/listOwnOrders", (req, res) => {
+    if(req.query.customername) {
+        service.listOwnOrders(req.query.customername,
+            (response) => {
+                res.status(200).send(response);
+            },
+            (cause) => {
+                res.status(400).send(cause);
+            });
+    }
+    else {
+        res.status(400).send("Wrong name");
+    }
+});
 
 module.exports = router;
 

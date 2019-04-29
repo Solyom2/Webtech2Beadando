@@ -21,7 +21,7 @@ function find(findParams, projection, callback) {
 
         collection.find(findParams, projection).toArray(function (err, docs) {
             assert.strictEqual(err, null);
-            console.log(docs);
+            //console.log(docs);
             callback(docs);
         });
         client.close();

@@ -1,5 +1,6 @@
 const express = require("express");
 var router = express.Router();
+const {check, validationResult} = require('express-validator/check');
 
 const service = require("../service/managerService");
 
@@ -53,16 +54,24 @@ router.post('/arrangeInstallation', (req, res) => {
         res.status(400).send('Wrong ID');
 });
 
-router.get('/createInvoice', (req, res) => {
+router.get('/createInvoice', [
+    check("customername").isString()
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({errors: errors.array()});
+    }
+    else {
         service.createInvoice(
-            req.query.name,
+            req.query.customername,
             (success) => {
                 if (success === true) {
                     res.status(200).send("Invoice Created")
                 } else if (success === false) {
                     res.status(400).send("Error");
                 }
-        });
+            });
+    }
 });
 
 module.exports = router;

@@ -12,9 +12,9 @@ app.use(bodyParser.json());
 const customerController = require("./controller/customerController");
 const workerController = require("./controller/workerController");
 const managerController = require("./controller/managerController");
-app.use("/", customerController);
-app.use("/", workerController);
-app.use("/", managerController);
+app.use("/customer", customerController);
+app.use("/worker", workerController);
+app.use("/manager", managerController);
 
 app.use(express.static('public'));
 

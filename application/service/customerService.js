@@ -30,6 +30,12 @@ function calculatePrice(order) {
     order.price = serviceCost + materialCost;
 }
 
+function listOwnOrders(customername, callback) {
+    dao.listOwnOrders(customername, (orders) => {
+        callback(orders);
+    });
+}
+
 module.exports = {
-    createOrder
+    createOrder, listOwnOrders
 }
