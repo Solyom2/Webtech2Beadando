@@ -55,14 +55,10 @@ function createItemsForInvoice(orders, callback) {
             address: element.address,
             description: 'Anyag: ' + element.shuttertype + ' Szín: ' + element.shuttercolor,
             quantity: element.quantity,
-            price: element.price
-            /*quantity: element.quantity,
-            name: 'Tutkó redőny',
-            description: element.shutter_color + ' ' + element.shutter_material + ' redőny',
             unit_price: element.price,
             net_price: element.price - (element.price * 0.20),
             vat_amount: element.price - (element.price * 0.80),
-            amount: element.price * element.quantity*/
+            amount: element.price
         });
     });
     callback(items);
@@ -72,46 +68,19 @@ function createDocument(name, items, orders, callback) {
     if (items.length === 0) { //checks if there were items under a name, basically if there wasn't a name like so then wont create pdf
         callback(false);
     } else {
-        const document = pdfInvoice({/*
+        const document = pdfInvoice({
             seller: {
-                phone: '1414',
+                phone: '1413',
                 email: 'redony@shutters.hu',
-                address: 'Ózd, Redőny utca 1.',
-                name: 'Redőny zrt.',
-                bank_acc: '88888888-00000000-11111111',
-                vat: 'ezmi',
-            },
-            buyer: {
-                name: name,
-                address: orders[Object.keys(orders)[0]].address,
-                email: name + '@t-offline.hu',
-                vat: 'ezmi',
-                eu_vat: 'eu_ezmi',
-            },
-            headline: {
-                createdAt: new Date().toISOString(),
-                completionDate: new Date().toISOString(),
-                paymentDeadline: new Date().toISOString(),
-                paymentMethod: 'Bankkártya',
-                invoiceId: orders[Object.keys(orders)[0]]._id,
-                commentText: 'Köszönjük vásárlását!',
-            },
-            items: items,*/
-            seller: {
-                phone: '555-0123',
-                email: 'info@uttershutters.hu',
-                address: '1102 New London, Blemmigan Square 256.',
-                name: 'Utter Shutters ZRT',
+                address: 'Ózd, Redőny utca 1',
+                name: 'Redőny Zrt.',
                 bank_acc: '00000000-00000000-00000000',
-                vat: 'ezmi',
             },
             buyer: {
                 // phone: '+36 (66) 888-8888',
                 name: name,
-                email: name + '@freemail.hu',
+                email: name + '@t-offline.hu',
                 address: orders[Object.keys(orders)[0]].address,
-                vat: 'ezmi',
-                eu_vat: 'eu_ezmi',
             },
             headline: {
                 createdAt: new Date().toISOString(),

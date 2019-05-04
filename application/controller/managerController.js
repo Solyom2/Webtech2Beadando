@@ -31,30 +31,36 @@ router.get("/checkPayments", (req, res) => {
         })
 });
 
-router.post('/arrangeInstallation', (req, res) => {
-    if (req.body.id) {
-        if (req.body.worker) {
-            if (req.body.appointment) {
-                        service.arrangeInstallation({
-                                id: req.body.id,
-                                worker: req.body.worker,
-                                appointment: req.body.appointment
-                            },
-                            () => {
-                                res.status(200).send("Installation organized!")
-                            },
-                            (cause) => {
-                                res.status(400).send(cause)
-                            });
-                    } else
-                        res.status(400).send('Wrong appointment');
-        } else
-            res.status(400).send('Wrong worker');
-    } else
-        res.status(400).send('Wrong ID');
+router.post('/arrangeInstallation', [
+    check("id").not().isEmpty(),
+    check("worker").not().isEmpty(),
+    check("appointment").not().isEmpty(),
+    check("id").isInt(),
+    check("worker").isString(),
+    check("appointment").isString()
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({errors: errors.array()});
+    }
+    else {
+        service.arrangeInstallation({
+                id: req.body.id,
+                worker: req.body.worker,
+                appointment: req.body.appointment
+            },
+            () => {
+                res.status(200).send("Installation organized!")
+            },
+            (cause) => {
+                res.status(400).send(cause)
+            });
+    }
 });
 
 router.get('/createInvoice', [
+    check("customername").not().isEmpty(),
+    check("customername").not().isNumeric(),
     check("customername").isString()
 ], (req, res) => {
     const errors = validationResult(req);
