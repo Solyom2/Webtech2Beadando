@@ -30,11 +30,15 @@ class OrderList extends React.Component {
                 <table className="bg-dark table-bordered table-hover text-white">
                     <tr>
                         <th>Customer name</th>
+                        <th>Customer address</th>
+                        <th>Price</th>
                     </tr>
                     {this.state.orders.map((i) => {
                         return (
                             <tr>
                                 <td>{i.customername}</td>
+                                <td>{i.address}</td>
+                                <td>{i.price}</td>
                             </tr>);
                     })
                     }
