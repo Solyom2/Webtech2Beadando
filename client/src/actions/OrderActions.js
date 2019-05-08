@@ -10,6 +10,13 @@ class OrderActions {
         });
     }
 
+    createOrder(order) {
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.CREATE_ORDER,
+            payload: order
+        })
+    }
+    
 }
 
 export default new OrderActions();

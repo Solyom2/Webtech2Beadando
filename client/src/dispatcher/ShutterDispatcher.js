@@ -32,4 +32,19 @@ dispatcher.register((data)=>{
         })
 });
 
+dispatcher.register((data) => {
+    if (data.payload.actionType !== OrderConstants.CREATE_ORDER) {
+        return;
+    }
+    console.log(data.payload.payload);
+    console.log(JSON.stringify(data.payload.payload));
+    fetch('/customer/createOrder', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(data.payload.payload)
+    })
+});
+
 export default dispatcher;

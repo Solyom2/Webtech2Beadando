@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './css/style.css';
 import OrderList from "./components/OrderList";
+import OrderForm from "./components/OrderForm";
 
 function App() {
   return (
@@ -9,6 +10,8 @@ function App() {
       <header></header>
 
       <OrderList/>
+
+      <OrderForm/>
     </div>
   );
 }
