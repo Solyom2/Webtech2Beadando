@@ -7,7 +7,9 @@ class OrderList extends React.Component {
     constructor(props) {
         super(props);
         this._onChange = this._onChange.bind(this);
-        this.state = { orders : OrderStore._orders};
+        this.state = {
+            orders : OrderStore._orders
+        };
     }
 
     _onChange(){
@@ -24,18 +26,28 @@ class OrderList extends React.Component {
 
     render() {
         return (
-                <div className="col-12">
-                    <ul className="list-group">
-                        {this.state.orders.map((order)=>{
-                            return(
-                                <li
-                                    key={order._id}
-                                    className="list-group-item"
-                                >{order["customername"]}</li>
-                            );
-                        })}
-                    </ul>
-                </div>
+            <div className="container">
+                <table className="bg-dark table-bordered table-hover text-white">
+                    <tr>
+                        <th>Customer name</th>
+                    </tr>
+                    {this.state.orders.map((i) => {
+                        return (
+                            <tr>
+                                <td>{i.customername}</td>
+                            </tr>);
+                    })
+                    }
+
+                </table>
+                <button type="submit" className="btn-dark btn"
+                        onClick={
+                            () => {
+                                OrderActions.listOrders();
+                            }}
+                >Fetch orders
+                </button>
+            </div>
         );
     }
 

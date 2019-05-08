@@ -24,14 +24,10 @@ dispatcher.register((data)=>{
     if(data.payload.actionType !== OrderConstants.LIST_ORDERS){
         return;
     }
-    ReactDOM.render(
-        React.createElement(OrderList),
-        document.getElementById('mainContentPanel')
-    );
     fetch('/manager/listAllOrder')
         .then((response) =>{return response.json()})
-        .then((orders)=>{
-            OrderStore._orders = orders;
+        .then((result)=>{
+            OrderStore._orders = result;
             OrderStore.emitChange();
         })
 });

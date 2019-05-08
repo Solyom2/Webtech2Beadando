@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import OrderList from "./components/OrderList";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <OrderList/>
     </div>
   );
 }
