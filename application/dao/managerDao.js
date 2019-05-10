@@ -29,7 +29,8 @@ function find(findParams, projection, callback) {
 }
 
 function listAllOrder(callback) {
-    var projection = {projection: {_id: 0}};
+    //var projection = {projection: {_id: 0}};
+    var projection = {projection: {}};
     find({}, projection, (result) => {
         callback(result)
     });

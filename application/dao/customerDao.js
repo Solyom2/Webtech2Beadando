@@ -40,7 +40,7 @@ function createOrder(order, callback) {
     client.connect((err) => {
         if (err) throw err;
         var db = client.db(MongoConfig.database.databaseName);
-
+        
         db.collection(MongoConfig.database.orderCollection).insertOne(order, function(err, res) {
             if (err) throw err;
             console.log("Order inserted to database");

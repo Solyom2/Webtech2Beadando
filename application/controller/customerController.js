@@ -5,45 +5,46 @@ const {check, validationResult} = require('express-validator/check');
 const service = require("../service/customerService");
 
 router.post("/createOrder", [
-    check("id").not().isEmpty(),
-    check("customername").not().isEmpty(),
-    check("address").not().isEmpty(),
-    check("windowlength").not().isEmpty(),
-    check("windowwidth").not().isEmpty(),
-    check("shuttertype").not().isEmpty(),
-    check("shuttercolor").not().isEmpty(),
-    check("quantity").not().isEmpty(),
+    check("order.id").not().isEmpty(),
+    check("order.customername").not().isEmpty(),
+    check("order.address").not().isEmpty(),
+    check("order.windowlength").not().isEmpty(),
+    check("order.windowwidth").not().isEmpty(),
+    check("order.shuttertype").not().isEmpty(),
+    check("order.shuttercolor").not().isEmpty(),
+    check("order.quantity").not().isEmpty(),
 
-    check("id").isInt(),
-    check("customername").isString(),
-    check("address").isString(),
-    check("windowlength").isInt(),
-    check("windowwidth").isInt(),
-    check("shuttertype").isString(),
-    check("shuttercolor").isString(),
-    check("quantity").isInt()
+    check("order.id").isInt(),
+    check("order.customername").isString(),
+    check("order.address").isString(),
+    check("order.windowlength").isInt(),
+    check("order.windowwidth").isInt(),
+    check("order.shuttertype").isString(),
+    check("order.shuttercolor").isString(),
+    check("order.quantity").isInt()
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+        console.log("hiba");
         res.status(400).json({errors: errors.array()});
     }
     else {
         console.log(req.body);
         service.createOrder(
             {
-                id: req.body.id,
-                customername: req.body.customername,
-                address: req.body.address,
-                windowlength: req.body.windowlength,
-                windowwidth: req.body.windowwidth,
-                shuttertype: req.body.shuttertype,
-                shuttercolor: req.body.shuttercolor,
-                quantity: req.body.quantity,
+                id: parseInt(req.body.order.id),
+                customername: req.body.order.customername,
+                address: req.body.order.address,
+                windowlength: parseInt(req.body.order.windowlength),
+                windowwidth: parseInt(req.body.order.windowwidth),
+                shuttertype: req.body.order.shuttertype,
+                shuttercolor: req.body.order.shuttercolor,
+                quantity: parseInt(req.body.order.quantity),
                 assembled: false
             },
             () => {
                 res.status(200).send("Order processed!")
-        })
+            })
     }
 
 });

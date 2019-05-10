@@ -2,7 +2,7 @@ import React from "react"
 import OrderActions from "../actions/OrderActions";
 import OrderStore from "../store/OrderStore";
 
-class OrderForm  extends React.Component{
+class OrderForm  extends React.Component {
 
     constructor(props) {
         super(props);
@@ -14,7 +14,7 @@ class OrderForm  extends React.Component{
                 address: "",
                 windowlength: null,
                 windowwidth: null,
-                shutterytype: "",
+                shuttertype: "",
                 shuttercolor: "",
                 quantity: null
             }
@@ -22,7 +22,7 @@ class OrderForm  extends React.Component{
     }
 
     _onChange(){
-        this.setState({orders : OrderStore._orders});
+        this.setState({});
     }
 
     componentDidMount(){
@@ -74,7 +74,7 @@ class OrderForm  extends React.Component{
 
                 <div className="row">Shuttertype
                     <input type="text" onChange={(event) => {
-                        this.state.order.shutterytype = event.target.value;
+                        this.state.order.shuttertype = event.target.value;
                         this.setState({order: this.state.order})
                     }}/>
                 </div>
