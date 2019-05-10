@@ -29,14 +29,13 @@ function find(findParams, projection, callback) {
 }
 
 function listUnassembledOrders(callback) {
-    var projection = {projection: {_id: 0}};
+    var projection = {projection: {}};
     find({assembled: false}, projection, (result) => {
         callback(result)
     });
 }
 
 function listParts(id, callback) {
-    //TODO szám alapján nem lehet keresni, stringgel igen id='1' customername='Nagy Béla'
     var projection = {projection: {_id: 0, parts: 1}};
     find({id: parseInt(id)}, projection, (result) => {
         callback(result);

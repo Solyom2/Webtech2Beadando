@@ -3,8 +3,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import OrderConstants from "../constants/OrderConstants";
+import PageConstants from "../constants/PageConstants";
 import OrderStore from "../store/OrderStore";
 import OrderList from "../components/OrderList";
+import OrderForm from "../components/OrderForm";
 
 
 class ShutterDispatcher extends Dispatcher{
@@ -19,6 +21,45 @@ class ShutterDispatcher extends Dispatcher{
 }
 
 const dispatcher = new ShutterDispatcher();
+
+dispatcher.register((data) => {
+    if (data.payload.actionType !== PageConstants.SHOW_CUSTOMER_PAGE) {
+        return;
+    }
+    ReactDOM.render(
+        React.createElement("div"),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement(OrderForm),
+        document.getElementById("formDiv")
+    );
+});
+
+dispatcher.register((data) => {
+    if (data.payload.actionType !== PageConstants.SHOW_MANAGER_PAGE) {
+        return;
+    }
+
+    fetch('/manager/listAllOrder')
+        .then((response) =>{return response.json()})
+        .then((result)=>{
+            OrderStore._orders = result;
+            OrderStore.emitChange();
+        })
+
+    ReactDOM.render(
+        React.createElement(OrderList),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement("div"),
+        document.getElementById("formDiv")
+    );
+});
+
 
 dispatcher.register((data)=>{
     if(data.payload.actionType !== OrderConstants.LIST_ORDERS){

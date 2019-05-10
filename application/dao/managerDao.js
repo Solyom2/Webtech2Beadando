@@ -37,7 +37,7 @@ function listAllOrder(callback) {
 }
 
 function listReadyOrders(callback) {
-    var projection = {projection: {_id: 0}};
+    var projection = {projection: {}};
     find({assembled: true}, projection, (result) => {
         callback(result)
     });

@@ -8,7 +8,7 @@ class OrderList extends React.Component {
         super(props);
         this._onChange = this._onChange.bind(this);
         this.state = {
-            orders : OrderStore._orders
+            orders : []
         };
     }
 
