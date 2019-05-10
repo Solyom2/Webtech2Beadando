@@ -1,5 +1,6 @@
 const assert = require("assert");
 const MongoClient = require("mongodb").MongoClient;
+const ObjectID = require("mongodb").ObjectID;
 const MongoConfig = {
     database : {
         url : "mongodb://localhost:27017",
@@ -36,8 +37,8 @@ function listUnassembledOrders(callback) {
 }
 
 function listParts(id, callback) {
-    var projection = {projection: {_id: 0, parts: 1}};
-    find({id: parseInt(id)}, projection, (result) => {
+    var projection = {projection: {_id: 1, parts: 1}};
+    find({_id: new ObjectID(id)}, projection, (result) => {
         callback(result);
     });
 }
@@ -50,7 +51,7 @@ function assembleShutter(id, callback) {
         var db = client.db(MongoConfig.database.databaseName);
         var collection = db.collection(MongoConfig.database.orderCollection);
 
-        collection.updateOne({id: id}, {
+        collection.updateOne({_id: new ObjectID(id)}, {
             $set: {
                 assembled: true
             }

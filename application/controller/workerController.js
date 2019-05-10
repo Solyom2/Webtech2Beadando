@@ -14,15 +14,14 @@ router.get("/listUnassembledOrders", (req, res) => {
 });
 
 router.get("/listParts", [
-    check("id").not().isEmpty(),
-    check("id").isInt()
+    check("_id").not().isEmpty()
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.status(400).json({errors: errors.array()});
     }
     else {
-        service.listParts(req.query.id,
+        service.listParts(req.query._id,
             (response) => {
                 res.status(200).send(response);
             },
@@ -34,16 +33,14 @@ router.get("/listParts", [
 });
 
 router.post("/assembleShutter", [
-    check("id").not().isEmpty(),
-    check("id").isInt()
+    check("_id").not().isEmpty()
 ], (req, res) => {
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.status(400).json({errors: errors.array()});
     }
     else {
-        service.assembleShutter(req.body.id,
+        service.assembleShutter(req.body._id,
             () => {
                 res.status(200).send("Shutter assembled")
             },

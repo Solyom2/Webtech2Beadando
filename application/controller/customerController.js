@@ -5,7 +5,6 @@ const {check, validationResult} = require('express-validator/check');
 const service = require("../service/customerService");
 
 router.post("/createOrder", [
-    check("order.id").not().isEmpty(),
     check("order.customername").not().isEmpty(),
     check("order.address").not().isEmpty(),
     check("order.windowlength").not().isEmpty(),
@@ -14,7 +13,6 @@ router.post("/createOrder", [
     check("order.shuttercolor").not().isEmpty(),
     check("order.quantity").not().isEmpty(),
 
-    check("order.id").isInt(),
     check("order.customername").isString(),
     check("order.address").isString(),
     check("order.windowlength").isInt(),
@@ -32,7 +30,6 @@ router.post("/createOrder", [
         console.log(req.body);
         service.createOrder(
             {
-                id: parseInt(req.body.order.id),
                 customername: req.body.order.customername,
                 address: req.body.order.address,
                 windowlength: parseInt(req.body.order.windowlength),

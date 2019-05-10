@@ -42,16 +42,7 @@ class OrderList extends React.Component {
                             </tr>);
                     })
                     }
-
                 </table>
-                <button type="submit" className="btn-dark btn"
-                        onClick={
-                            () => {
-                                console.log("Oké");
-                                OrderActions.listOrders();
-                            }}
-                >Fetch orders
-                </button>
             </div>
         );
     }

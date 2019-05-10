@@ -10,12 +10,20 @@ class OrderActions {
         });
     }
 
+    listCustomerOrders(customername){
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.LIST_CUSTOMER_ORDERS,
+            payload : customername
+        });
+    }
+
     listUnfinishedOrders(){
         ShutterDispatcher.handleViewAction({
             actionType: OrderConstants.LIST_UNFINISHED_ORDERS,
             payload : null
         });
     }
+    
 
     createOrder(order) {
         ShutterDispatcher.handleViewAction({

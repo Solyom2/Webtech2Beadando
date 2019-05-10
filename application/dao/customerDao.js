@@ -29,7 +29,7 @@ function find(findParams, projection, callback) {
 }
 
 function listOwnOrders(customername, callback) {
-    var projection = {projection: {assembled: 0, parts: 0, "installation.worker": 0}};
+    var projection = {projection: {customername: 0, address: 0, assembled: 0, parts: 0, "installation.worker": 0}};
     find({customername: customername}, projection, (result) => {
         callback(result)
     });

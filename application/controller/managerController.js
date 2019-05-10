@@ -32,10 +32,9 @@ router.get("/checkPayments", (req, res) => {
 });
 
 router.post('/arrangeInstallation', [
-    check("id").not().isEmpty(),
+    check("_id").not().isEmpty(),
     check("worker").not().isEmpty(),
     check("appointment").not().isEmpty(),
-    check("id").isInt(),
     check("worker").isString(),
     check("appointment").isString()
 ], (req, res) => {
@@ -45,7 +44,7 @@ router.post('/arrangeInstallation', [
     }
     else {
         service.arrangeInstallation({
-                id: req.body.id,
+                _id: req.body._id,
                 worker: req.body.worker,
                 appointment: req.body.appointment
             },

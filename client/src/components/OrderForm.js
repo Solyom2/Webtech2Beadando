@@ -37,13 +37,6 @@ class OrderForm  extends React.Component {
         return(
             <div className="container">
 
-                <div className="row">ID
-                    <input type="number" onChange={(event) => {
-                        this.state.order.id = event.target.value;
-                        this.setState({order: this.state.order})
-                    }}/>
-                </div>
-
                 <div className="row">Customer name
                     <input type="text" onChange={(event) => {
                         this.state.order.customername = event.target.value;

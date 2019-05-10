@@ -1,5 +1,6 @@
 const assert = require("assert");
 const MongoClient = require("mongodb").MongoClient;
+const ObjectID = require("mongodb").ObjectID;
 const MongoConfig = {
     database : {
         url : "mongodb://localhost:27017",
@@ -58,12 +59,11 @@ function arrangeInstallation(data, callback) {
         var db = client.db(MongoConfig.database.databaseName);
         var collection = db.collection(MongoConfig.database.orderCollection);
 
-        collection.updateOne({id: data.id}, {
+        collection.updateOne({_id: new ObjectID(data._id)}, {
             $set: {
                 installation: {
                     worker: data.worker,
-                    appointment: data.appointment,
-                    finished: false
+                    appointment: data.appointment
                 }
             }
         }, function (err, docs) {

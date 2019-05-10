@@ -7,6 +7,7 @@ import PageConstants from "../constants/PageConstants";
 import OrderStore from "../store/OrderStore";
 import OrderList from "../components/OrderList";
 import OrderForm from "../components/OrderForm";
+import CustomerOrderList from "../components/CustomerOrderList";
 import UnfinishedOrderList from "../components/UnfinishedOrderList";
 
 
@@ -28,7 +29,7 @@ dispatcher.register((data) => {
         return;
     }
     ReactDOM.render(
-        React.createElement("div"),
+        React.createElement(CustomerOrderList),
         document.getElementById("listDiv")
     );
 
@@ -92,6 +93,28 @@ dispatcher.register((data)=>{
     fetch('/manager/listAllOrder')
         .then((response) =>{return response.json()})
         .then((result)=>{
+            OrderStore._orders = result;
+            OrderStore.emitChange();
+        })
+});
+
+dispatcher.register((data)=>{
+    if(data.payload.actionType !== OrderConstants.LIST_CUSTOMER_ORDERS){
+        return;
+    }
+    fetch('/customer/listOwnOrders?customername=' + data.payload.payload)
+        .then((response) =>{return response.json()})
+        .then((result)=>{
+            for(var i = 0; i < result.length; i++) {
+                if(result[i].installation == undefined) {
+                    var obj = {
+                            worker: null,
+                            appointment: "Empty"
+                        }
+                    result[i].installation = obj;
+                }
+            }
+
             OrderStore._orders = result;
             OrderStore.emitChange();
         })
