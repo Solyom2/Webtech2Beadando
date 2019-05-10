@@ -7,6 +7,7 @@ import PageConstants from "../constants/PageConstants";
 import OrderStore from "../store/OrderStore";
 import OrderList from "../components/OrderList";
 import OrderForm from "../components/OrderForm";
+import UnfinishedOrderList from "../components/UnfinishedOrderList";
 
 
 class ShutterDispatcher extends Dispatcher{
@@ -60,12 +61,47 @@ dispatcher.register((data) => {
     );
 });
 
+dispatcher.register((data) => {
+    if (data.payload.actionType !== PageConstants.SHOW_WORKER_PAGE) {
+        return;
+    }
+
+    fetch('/worker/listUnassembledOrders')
+        .then((response) =>{return response.json()})
+        .then((result)=>{
+            OrderStore._orders = result;
+            OrderStore.emitChange();
+        })
+
+    ReactDOM.render(
+        React.createElement(UnfinishedOrderList),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement("div"),
+        document.getElementById("formDiv")
+    );
+});
+
 
 dispatcher.register((data)=>{
     if(data.payload.actionType !== OrderConstants.LIST_ORDERS){
         return;
     }
     fetch('/manager/listAllOrder')
+        .then((response) =>{return response.json()})
+        .then((result)=>{
+            OrderStore._orders = result;
+            OrderStore.emitChange();
+        })
+});
+
+dispatcher.register((data)=>{
+    if(data.payload.actionType !== OrderConstants.LIST_UNFINISHED_ORDERS){
+        return;
+    }
+    fetch('/worker/listUnassembledOrders')
         .then((response) =>{return response.json()})
         .then((result)=>{
             OrderStore._orders = result;

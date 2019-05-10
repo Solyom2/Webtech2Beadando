@@ -2,7 +2,7 @@ import React from "react"
 import OrderActions from "../actions/OrderActions";
 import OrderStore from "../store/OrderStore";
 
-class OrderList extends React.Component {
+class UnfinishedOrderList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -31,31 +31,27 @@ class OrderList extends React.Component {
                     <tr>
                         <th>Customer name</th>
                         <th>Customer address</th>
-                        <th>Price</th>
+                        <th>Shutter type</th>
+                        <th>Shutter color</th>
+                        <th>Quantity</th>
                     </tr>
                     {this.state.orders.map((i) => {
                         return (
                             <tr>
                                 <td>{i.customername}</td>
                                 <td>{i.address}</td>
-                                <td>{i.price}</td>
+                                <td>{i.shuttertype}</td>
+                                <td>{i.shuttercolor}</td>
+                                <td>{i.quantity}</td>
                             </tr>);
                     })
                     }
 
                 </table>
-                <button type="submit" className="btn-dark btn"
-                        onClick={
-                            () => {
-                                console.log("Oké");
-                                OrderActions.listOrders();
-                            }}
-                >Fetch orders
-                </button>
             </div>
         );
     }
 
 }
 
-export default OrderList;
+export default UnfinishedOrderList;

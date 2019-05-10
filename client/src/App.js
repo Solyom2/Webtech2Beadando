@@ -3,8 +3,6 @@ import logo from './logo.svg';
 import './css/style.css';
 import OrderActions from "./actions/OrderActions";
 import PageActions from "./actions/PageActions";
-import OrderList from "./components/OrderList";
-import OrderForm from "./components/OrderForm";
 
 
 function App() {
@@ -21,6 +19,11 @@ function App() {
                     <div className="col navbar-text" onClick={() => {
                         PageActions.showManagerPage();
                     }}>Manager page
+                    </div>
+
+                    <div className="col navbar-text" onClick={() => {
+                        PageActions.showWorkerPage();
+                    }}>Worker page
                     </div>
                 </div>
             </div>

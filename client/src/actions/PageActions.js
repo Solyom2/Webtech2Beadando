@@ -17,12 +17,12 @@ class PageActions {
         });
     }
 
-    /*showWorkerPage(){
+    showWorkerPage(){
         ShutterDispatcher.handleViewAction({
             actionType: PageConstants.SHOW_WORKER_PAGE,
             payload : null
         });
-    }*/
+    }
 
 }
 

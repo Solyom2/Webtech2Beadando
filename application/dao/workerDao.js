@@ -29,7 +29,7 @@ function find(findParams, projection, callback) {
 }
 
 function listUnassembledOrders(callback) {
-    var projection = {projection: {}};
+    var projection = {projection: {price: 0, windowlength: 0, windowwidth: 0}};
     find({assembled: false}, projection, (result) => {
         callback(result)
     });

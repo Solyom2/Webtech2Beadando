@@ -10,6 +10,13 @@ class OrderActions {
         });
     }
 
+    listUnfinishedOrders(){
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.LIST_UNFINISHED_ORDERS,
+            payload : null
+        });
+    }
+
     createOrder(order) {
         ShutterDispatcher.handleViewAction({
             actionType: OrderConstants.CREATE_ORDER,
