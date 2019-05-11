@@ -2,7 +2,8 @@ const express = require("express");
 var router = express.Router();
 const {check, validationResult} = require('express-validator/check');
 
-const service = require("../service/managerService");
+const ms = require("../service/managerService");
+const service = new ms();
 
 router.get("/listAllOrder", (req, res) => {
     service.listAllOrder((response) => {

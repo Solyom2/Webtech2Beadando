@@ -1,33 +1,40 @@
-const dao = require("../dao/managerDao");
 const pdfInvoice = require('pdf-invoice-hu');
 const fs = require('fs');
 
-function listAllOrder(callback) {
-    dao.listAllOrder((orders) => {
+function ManagerService(managerDao) {
+    if (managerDao !== undefined && managerDao !== null) {
+        this.dao = managerDao;
+    } else {
+        this.dao = require("../dao/managerDao");
+    }
+}
+
+ManagerService.prototype.listAllOrder = function(callback) {
+    this.dao.listAllOrder((orders) => {
         callback(orders);
     });
 }
 
-function listReadyOrders(callback) {
-    dao.listReadyOrders((orders) => {
+ManagerService.prototype.listReadyOrders = function (callback) {
+    this.dao.listReadyOrders((orders) => {
         callback(orders);
     });
 }
 
-function checkPayments(callback) {
-    dao.checkPayments((orders) => {
+ManagerService.prototype.checkPayments = function(callback) {
+    this.dao.checkPayments((orders) => {
         callback(orders);
     });
 }
 
-function arrangeInstallation(data, callback) {
-    dao.arrangeInstallation(data, (response) => {
+ManagerService.prototype.arrangeInstallation = function (data, callback) {
+    this.dao.arrangeInstallation(data, (response) => {
         callback(response);
     });
 }
 
-function createInvoice(id, callback) {
-    dao.listReadyOrders((orders) => {
+ManagerService.prototype.createInvoice = function (id, callback) {
+    this.dao.listReadyOrders((orders) => {
         filterOrdersByName(id, orders, (result) => {
             createItemsForInvoice(result, (items) => {
                 createDocument(items, result, (document) => {
@@ -108,8 +115,8 @@ function createInvoiceFile(document, callback) {
     }
 }
 
-function checkStatistics (callback) {
-   dao.listAllOrder( (orders) => {
+ManagerService.prototype.checkStatistics = function (callback) {
+   this.dao.listAllOrder( (orders) => {
        callback(createStatistics(orders));
     });
 };
@@ -135,19 +142,12 @@ function createStatistics(orders) {
             }
         }
     });
-    stats.averageQuantityPerOrder = (stats.requestedShutters / stats.submittedOrders);
-    stats.averagePricePerOrder = (stats.totalPriceOfOrders / stats.submittedOrders);
+    stats.averageQuantityPerOrder = (stats.requestedShutters / stats.submittedOrders).toFixed(2);
+    stats.averagePricePerOrder = (stats.totalPriceOfOrders / stats.submittedOrders).toFixed(2);
 
     console.log(stats);
 
     return stats;
 }
 
-module.exports = {
-    listAllOrder,
-    listReadyOrders,
-    checkPayments,
-    arrangeInstallation,
-    createInvoice,
-    checkStatistics
-};
+module.exports = ManagerService;

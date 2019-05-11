@@ -16,7 +16,7 @@ const daoMock = sinon.mock(dao);
 const service = new cs(dao);
 
 mocha.describe('Customer Service Test', function () {
-    it('createOrder is called once and verifies if the callbacks value is correct', function () {
+    it('CreateOrder is called once and verifies if the callbacks value is correct', function () {
         daoMock.expects('createOrder').once();
         service.createOrder({done: 'done'}, (result) => {
             assert.strictEqual(result, {done: 'done'});
@@ -24,7 +24,7 @@ mocha.describe('Customer Service Test', function () {
         assert(daoMock.verify());
     });
 
-    it('list queued orders which are called once and correct', function () {
+    it('List owned orders function is called once and verify if the callback values are correct', function () {
         daoMock.expects('listOwnOrders').once();
         service.listOwnOrders('name', (result) => {
             assert.strictEqual(result, 'name');

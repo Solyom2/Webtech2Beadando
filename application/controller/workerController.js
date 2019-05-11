@@ -2,7 +2,8 @@ const express = require("express");
 var router = express.Router();
 const {check, validationResult} = require('express-validator/check');
 
-const service = require("../service/workerService");
+const ws = require("../service/workerService");
+const service = new ws();
 
 router.get("/listUnassembledOrders", (req, res) => {
     service.listUnassembledOrders((response) => {

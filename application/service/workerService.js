@@ -1,25 +1,27 @@
-const dao = require("../dao/workerDao");
+function WorkerService(workerDao) {
+    if (workerDao !== undefined && workerDao !== null) {
+        this.dao = workerDao;
+    } else {
+        this.dao = require("../dao/workerDao");
+    }
+}
 
-function listUnassembledOrders(callback) {
-    dao.listUnassembledOrders((orders) => {
+WorkerService.prototype.listUnassembledOrders = function(callback) {
+    this.dao.listUnassembledOrders((orders) => {
         callback(orders);
     });
 }
 
-function listParts(id, callback) {
-    dao.listParts(id, (result) => {
+WorkerService.prototype.listParts = function (id, callback) {
+    this.dao.listParts(id, (result) => {
         callback(result);
     })
 }
 
-function assembleShutter(id, callback) {
-    dao.assembleShutter(id, (response) => {
+WorkerService.prototype.assembleShutter = function (id, callback) {
+    this.dao.assembleShutter(id, (response) => {
         callback(response);
     })
 }
 
-module.exports = {
-    listUnassembledOrders,
-    listParts,
-    assembleShutter
-}
+module.exports = WorkerService;
