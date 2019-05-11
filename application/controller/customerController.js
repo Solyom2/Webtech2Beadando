@@ -2,7 +2,8 @@ const express = require("express");
 var router = express.Router();
 const {check, validationResult} = require('express-validator/check');
 
-const service = require("../service/customerService");
+const cs = require("../service/customerService");
+const service = new cs();
 
 router.post("/createOrder", [
     check("order.customername").not().isEmpty(),

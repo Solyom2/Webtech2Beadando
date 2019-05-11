@@ -4,7 +4,7 @@
   "description": "Assignsment for Web Technologies 2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha application/test",
     "prestart": "npm install",
     "start": "node application/server.js"
   },
@@ -17,8 +17,9 @@
     "express-validator": "^5.3.1",
     "mongodb": "^3.2.3",
     "assert": "^1.4.1",
-    "winston": "^3.2.1",
     "app-root-path": "^2.2.1",
-    "pdf-invoice-hu": "^1.0.2"
+    "pdf-invoice-hu": "^1.0.2",
+    "mocha": "^6.1.4",
+    "sinon": "^7.3.2"
   }
 }

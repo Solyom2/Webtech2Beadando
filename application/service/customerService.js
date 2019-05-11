@@ -1,11 +1,16 @@
-const dao = require("../dao/customerDao");
+function CustomerService(customerDao) {
+    if (customerDao !== undefined && customerDao !== null) {
+        this.dao = customerDao;
+    } else {
+        this.dao = require("../dao/customerDao");
+    }
+}
 
-function createOrder(order, callback) {
-    //sends the order to the db, after a processing
+CustomerService.prototype.createOrder = function(order, callback) {
     finishOrder(order, (finishedOrder) => {
         order = finishedOrder;
     });
-    dao.createOrder(order, (response) => {
+    this.dao.createOrder(order, (response) => {
         callback(response);
     });
 }
@@ -30,12 +35,10 @@ function calculatePrice(order) {
     order.price = serviceCost + materialCost;
 }
 
-function listOwnOrders(customername, callback) {
-    dao.listOwnOrders(customername, (orders) => {
+CustomerService.prototype.listOwnOrders = function(customername, callback) {
+    this.dao.listOwnOrders(customername, (orders) => {
         callback(orders);
     });
 }
 
-module.exports = {
-    createOrder, listOwnOrders
-}
+module.exports = CustomerService;
