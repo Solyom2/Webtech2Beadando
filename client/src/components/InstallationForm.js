@@ -54,6 +54,7 @@ class InstallationForm extends React.Component {
                         console.log(installationObj);
 
                         OrderActions.arrangeInstallation(installationObj);
+                        OrderActions.createInvoice(installationObj._id);
                         PageActions.showManagerPage();
                     }}
                     className="btn btn-success">Organize installation

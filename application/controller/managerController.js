@@ -58,9 +58,7 @@ router.post('/arrangeInstallation', [
 });
 
 router.get('/createInvoice', [
-    check("customername").not().isEmpty(),
-    check("customername").not().isNumeric(),
-    check("customername").isString()
+    check("_id").not().isEmpty(),
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -68,7 +66,7 @@ router.get('/createInvoice', [
     }
     else {
         service.createInvoice(
-            req.query.customername,
+            req.query._id,
             (success) => {
                 if (success === true) {
                     res.status(200).send("Invoice Created")

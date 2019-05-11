@@ -52,6 +52,13 @@ class OrderActions {
         })
     }
 
+    createInvoice(id) {
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.CREATE_INVOICE,
+            payload : id
+        });
+    }
+
     createOrder(order) {
         ShutterDispatcher.handleViewAction({
             actionType: OrderConstants.CREATE_ORDER,

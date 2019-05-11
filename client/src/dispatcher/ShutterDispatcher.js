@@ -223,6 +223,18 @@ dispatcher.register((data) => {
     })
 });
 
+dispatcher.register((data)=>{
+    if(data.payload.actionType !== OrderConstants.CREATE_INVOICE) {
+        return;
+    }
+    fetch('/manager/createInvoice?_id=' + data.payload.payload)
+        .then((response) =>{return response.json()})
+        .then((result)=>{
+
+        })
+});
+
+
 dispatcher.register((data) => {
     if (data.payload.actionType !== OrderConstants.CREATE_ORDER) {
         return;

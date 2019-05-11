@@ -26,11 +26,11 @@ function arrangeInstallation(data, callback) {
     });
 }
 
-function createInvoice(customername, callback) {
+function createInvoice(id, callback) {
     dao.listReadyOrders((orders) => {
-        filterOrdersByName(customername, orders, (result) => {
+        filterOrdersByName(id, orders, (result) => {
             createItemsForInvoice(result, (items) => {
-                createDocument(customername, items, result, (document) => {
+                createDocument(items, result, (document) => {
                     createInvoiceFile(document, (success) => {
                         callback(success);
                     });
@@ -40,9 +40,9 @@ function createInvoice(customername, callback) {
     });
 }
 
-function filterOrdersByName(customername, orders, callback) {
+function filterOrdersByName(id, orders, callback) {
     var result = orders.filter(function (order) {
-        return order.customername === customername;
+        return order._id == id;
     });
     callback(result);
 }
@@ -50,7 +50,6 @@ function filterOrdersByName(customername, orders, callback) {
 function createItemsForInvoice(orders, callback) {
     var items = [];
     orders.forEach(function (element) {
-        console.log(element);
 
         items.push({
             customername : element.customername,
@@ -66,7 +65,7 @@ function createItemsForInvoice(orders, callback) {
     callback(items);
 }
 
-function createDocument(name, items, orders, callback) {
+function createDocument(items, orders, callback) {
     if (items.length === 0) {
         callback(false);
     } else {
@@ -79,9 +78,9 @@ function createDocument(name, items, orders, callback) {
                 bank_acc: '00000000-00000000-00000000',
             },
             buyer: {
-                // phone: '+36 (66) 888-8888',
-                name: name,
-                email: name + '@t-offline.hu',
+                phone: "+36 70 1234567",
+                name: orders[Object.keys(orders)[0]].customername,
+                email: orders[Object.keys(orders)[0]].customername + '@t-offline.hu',
                 address: orders[Object.keys(orders)[0]].address,
             },
             headline: {
@@ -104,7 +103,7 @@ function createInvoiceFile(document, callback) {
     } else {
         document.generate();
         let pdfName = `invoice${Math.round(Math.random() * 1000000)}.pdf`;
-        document.pdfkitDoc.pipe(fs.createWriteStream(`./public/invoices/${pdfName}`));
+        document.pdfkitDoc.pipe(fs.createWriteStream(`./invoices/${pdfName}`));
         callback(true);
     }
 }
