@@ -23,7 +23,20 @@ class OrderActions {
             payload : null
         });
     }
-    
+
+    listParts(id){
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.LIST_PARTS,
+            payload : id
+        });
+    }
+
+    assembleShutter(order){
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.ASSEMBLE_SHUTTER,
+            payload : order
+        });
+    }
 
     createOrder(order) {
         ShutterDispatcher.handleViewAction({

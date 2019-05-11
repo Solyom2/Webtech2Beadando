@@ -37,7 +37,9 @@ class UnfinishedOrderList extends React.Component {
                     </tr>
                     {this.state.orders.map((i) => {
                         return (
-                            <tr>
+                            <tr onClick={() => {
+                                OrderActions.listParts(i._id)
+                            }}>
                                 <td>{i.customername}</td>
                                 <td>{i.address}</td>
                                 <td>{i.shuttertype}</td>

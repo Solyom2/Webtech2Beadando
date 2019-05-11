@@ -3,7 +3,14 @@ import {EventEmitter} from "events";
 class OrderStore extends EventEmitter{
 
     _orders = [];
-    _selectedOrder = null;
+    _selectedParts = {
+        _id: "",
+        shuttertype: "",
+        shuttercolor: "",
+        quantity: null,
+        parts: { shutterlength: null, shutterwidth: null, pulley: null }
+
+    };
 
     emitChange(){
         this.emit('change')

@@ -9,6 +9,7 @@ import OrderList from "../components/OrderList";
 import OrderForm from "../components/OrderForm";
 import CustomerOrderList from "../components/CustomerOrderList";
 import UnfinishedOrderList from "../components/UnfinishedOrderList";
+import PartsList from "../components/PartsList";
 
 
 class ShutterDispatcher extends Dispatcher{
@@ -131,6 +132,43 @@ dispatcher.register((data)=>{
             OrderStore.emitChange();
         })
 });
+
+dispatcher.register((data)=>{
+    if(data.payload.actionType !== OrderConstants.LIST_PARTS){
+        return;
+    }
+    fetch('/worker/listParts?_id=' + data.payload.payload)
+        .then((response) =>{return response.json()})
+        .then((result)=>{
+            OrderStore._selectedParts = result[0];
+            OrderStore.emitChange();
+        })
+
+    ReactDOM.render(
+        React.createElement(PartsList),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement("div"),
+        document.getElementById("formDiv")
+    );
+});
+
+dispatcher.register((data) => {
+    if (data.payload.actionType !== OrderConstants.ASSEMBLE_SHUTTER) {
+        return;
+    }
+    console.log(JSON.stringify(data.payload.payload));
+    fetch('/worker/assembleShutter', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(data.payload.payload)
+    })
+});
+
 
 dispatcher.register((data) => {
     if (data.payload.actionType !== OrderConstants.CREATE_ORDER) {

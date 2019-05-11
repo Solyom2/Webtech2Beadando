@@ -37,7 +37,7 @@ function listUnassembledOrders(callback) {
 }
 
 function listParts(id, callback) {
-    var projection = {projection: {_id: 1, parts: 1}};
+    var projection = {projection: {_id: 1, shuttertype: 1, shuttercolor: 1, quantity: 1,  parts: 1}};
     find({_id: new ObjectID(id)}, projection, (result) => {
         callback(result);
     });
