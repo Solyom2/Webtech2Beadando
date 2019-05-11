@@ -4,5 +4,7 @@ module.exports = {
     LIST_UNFINISHED_ORDERS : "list_unfinished_orders",
     LIST_PARTS : "list_parts",
     ASSEMBLE_SHUTTER : "assemble_shutter",
+    SHOW_INSTALLATION_FORM : "show_installation_form",
+    ARRANGE_INSTALLATION : "arrange_installation",
     CREATE_ORDER : "create_order"
 }

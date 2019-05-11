@@ -3,13 +3,20 @@ import {EventEmitter} from "events";
 class OrderStore extends EventEmitter{
 
     _orders = [];
+    _finishedOrders = [];
+    _selectedOrder = {
+        _id: "",
+        customername: "",
+        address: "",
+        price: null,
+        installation: { worker: null, appointment: null }
+    };
     _selectedParts = {
         _id: "",
         shuttertype: "",
         shuttercolor: "",
         quantity: null,
         parts: { shutterlength: null, shutterwidth: null, pulley: null }
-
     };
 
     emitChange(){

@@ -22,7 +22,6 @@ function find(findParams, projection, callback) {
 
         collection.find(findParams, projection).toArray(function (err, docs) {
             assert.strictEqual(err, null);
-            //console.log(docs);
             callback(docs);
         });
         client.close();
@@ -38,14 +37,14 @@ function listAllOrder(callback) {
 }
 
 function listReadyOrders(callback) {
-    var projection = {projection: {}};
+    var projection = {projection: {_id : 1, customername:  1, address: 1, price: 1, installation: 1}};
     find({assembled: true}, projection, (result) => {
         callback(result)
     });
 }
 
 function checkPayments(callback) {
-    var projection = {projection: {_id: 0, customername: 1, address: 1, price: 1}};
+    var projection = {projection: {_id: 1, customername: 1, address: 1, price: 1}};
     find({}, projection, (result) => {
         callback(result)
     });

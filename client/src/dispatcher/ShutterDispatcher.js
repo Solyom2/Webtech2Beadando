@@ -5,12 +5,12 @@ import ReactDOM from "react-dom";
 import OrderConstants from "../constants/OrderConstants";
 import PageConstants from "../constants/PageConstants";
 import OrderStore from "../store/OrderStore";
-import OrderList from "../components/OrderList";
+import ManagerOrderList from "../components/ManagerOrderList";
 import OrderForm from "../components/OrderForm";
 import CustomerOrderList from "../components/CustomerOrderList";
 import UnfinishedOrderList from "../components/UnfinishedOrderList";
 import PartsList from "../components/PartsList";
-
+import InstallationForm from "../components/InstallationForm";
 
 class ShutterDispatcher extends Dispatcher{
 
@@ -52,8 +52,25 @@ dispatcher.register((data) => {
             OrderStore.emitChange();
         })
 
+    fetch('/manager/listReadyOrders')
+        .then((response) =>{return response.json()})
+        .then((result)=>{
+            for(var i = 0; i < result.length; i++) {
+                if(result[i].installation == undefined) {
+                    var obj = {
+                        worker: "Empty",
+                        appointment: "Empty"
+                    }
+                    result[i].installation = obj;
+                }
+            }
+
+            OrderStore._finishedOrders = result;
+            OrderStore.emitChange();
+        })
+
     ReactDOM.render(
-        React.createElement(OrderList),
+        React.createElement(ManagerOrderList),
         document.getElementById("listDiv")
     );
 
@@ -169,6 +186,38 @@ dispatcher.register((data) => {
     })
 });
 
+dispatcher.register((data)=>{
+    if(data.payload.actionType !== OrderConstants.SHOW_INSTALLATION_FORM){
+        return;
+    }
+    OrderStore._selectedOrder = data.payload.payload;
+    console.log(OrderStore._selectedOrder);
+    OrderStore.emitChange();
+
+    ReactDOM.render(
+        React.createElement("div"),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement(InstallationForm),
+        document.getElementById("formDiv")
+    );
+});
+
+dispatcher.register((data) => {
+    if (data.payload.actionType !== OrderConstants.ARRANGE_INSTALLATION) {
+        return;
+    }
+    console.log(JSON.stringify(data.payload.payload));
+    fetch('/manager/arrangeInstallation', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(data.payload.payload)
+    })
+});
 
 dispatcher.register((data) => {
     if (data.payload.actionType !== OrderConstants.CREATE_ORDER) {

@@ -2,6 +2,7 @@ import React from "react"
 import OrderActions from "../actions/OrderActions";
 import PageActions from "../actions/PageActions";
 import OrderStore from "../store/OrderStore";
+
 class PartsList extends React.Component {
 
     constructor(props) {

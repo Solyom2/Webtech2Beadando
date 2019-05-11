@@ -38,6 +38,20 @@ class OrderActions {
         });
     }
 
+    showInstallationForm(order) {
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.SHOW_INSTALLATION_FORM,
+            payload: order
+        })
+    }
+
+    arrangeInstallation(installation) {
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.ARRANGE_INSTALLATION,
+            payload: installation
+        })
+    }
+
     createOrder(order) {
         ShutterDispatcher.handleViewAction({
             actionType: OrderConstants.CREATE_ORDER,
