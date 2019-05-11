@@ -32,7 +32,7 @@ function listAllOrder(callback) {
     //var projection = {projection: {_id: 0}};
     var projection = {projection: {}};
     find({}, projection, (result) => {
-        callback(result)
+        callback(result);
     });
 }
 
@@ -73,6 +73,8 @@ function arrangeInstallation(data, callback) {
     });
 }
 
+
+
 module.exports = {
     listAllOrder, listReadyOrders, checkPayments, arrangeInstallation
-}
+};

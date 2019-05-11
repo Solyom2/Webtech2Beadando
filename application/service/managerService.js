@@ -108,10 +108,54 @@ function createInvoiceFile(document, callback) {
     }
 }
 
+function checkStatistics (callback) {
+   dao.listAllOrder( (orders) => {
+       callback(createStatistics(orders));
+    });
+};
+
+function createStatistics(orders) {
+    var stats = {
+        submittedOrders: 0,
+        totalPriceOfOrders: 0,
+        requestedShutters : 0,
+        assembledShutters: 0,
+        averageQuantityPerOrder: 0,
+        averagePricePerOrder: 0
+    };
+
+    orders.forEach(function (order) {
+        if (order.parts) {
+            stats.submittedOrders++;
+            stats.totalPriceOfOrders += order.price;
+            stats.requestedShutters += order.quantity;
+
+            if(order.assembled === true) {
+                stats.assembledShutters++;
+            }
+
+            /*order.windows.forEach(function (window) {
+                stats.numberOfRequestedShutters++;
+                if (window.assembled === true) {
+                    stats.shuttersAssembled++;
+                }
+            })*/
+
+        }
+    });
+    stats.averageQuantityPerOrder = (stats.requestedShutters / stats.submittedOrders);
+    stats.averagePricePerOrder = (stats.totalPriceOfOrders / stats.submittedOrders);
+
+    console.log(stats);
+
+    return stats;
+}
+
 module.exports = {
     listAllOrder,
     listReadyOrders,
     checkPayments,
     arrangeInstallation,
-    createInvoice
+    createInvoice,
+    checkStatistics
 };

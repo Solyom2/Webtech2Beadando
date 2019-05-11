@@ -77,4 +77,13 @@ router.get('/createInvoice', [
     }
 });
 
+router.get('/checkStatistics',(req, res) => {
+        service.checkStatistics((response) => {
+                res.status(200).send(response);
+            },
+            (cause) => {
+                res.status(400).send(cause);
+            })
+});
+
 module.exports = router;
