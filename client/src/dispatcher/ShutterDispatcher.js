@@ -11,6 +11,7 @@ import CustomerOrderList from "../components/CustomerOrderList";
 import UnfinishedOrderList from "../components/UnfinishedOrderList";
 import PartsList from "../components/PartsList";
 import InstallationForm from "../components/InstallationForm";
+import Statistics from "../components/Statistics";
 
 class ShutterDispatcher extends Dispatcher{
 
@@ -247,6 +248,28 @@ dispatcher.register((data) => {
         },
         body: JSON.stringify(data.payload.payload)
     })
+});
+
+dispatcher.register((data)=>{
+    if(data.payload.actionType !== OrderConstants.SHOW_STATISTICS){
+        return;
+    }
+    fetch("/manager/checkStatistics")
+        .then((response) =>{return response.json()})
+        .then((result)=>{
+            OrderStore._stats = result;
+            OrderStore.emitChange();
+        })
+
+    ReactDOM.render(
+        React.createElement(Statistics),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement("div"),
+        document.getElementById("formDiv")
+    );
 });
 
 export default dispatcher;

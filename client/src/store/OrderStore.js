@@ -18,6 +18,14 @@ class OrderStore extends EventEmitter{
         quantity: null,
         parts: { shutterlength: null, shutterwidth: null, pulley: null }
     };
+    _stats = {
+        submittedOrders: 0,
+        totalPriceOfOrders: 0,
+        requestedShutters : 0,
+        assembledShutters: 0,
+        averageQuantityPerOrder: 0,
+        averagePricePerOrder: 0
+    };
 
     emitChange(){
         this.emit('change')

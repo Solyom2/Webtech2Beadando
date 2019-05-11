@@ -65,6 +65,13 @@ class OrderActions {
             payload: order
         })
     }
+
+    showStatistics(){
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.SHOW_STATISTICS,
+            payload : null
+        });
+    }
     
 }
 

@@ -7,5 +7,6 @@ module.exports = {
     SHOW_INSTALLATION_FORM : "show_installation_form",
     ARRANGE_INSTALLATION : "arrange_installation",
     CREATE_INVOICE : "create_invoice",
-    CREATE_ORDER : "create_order"
+    CREATE_ORDER : "create_order",
+    SHOW_STATISTICS : "show_Statistics"
 }

@@ -26,7 +26,6 @@ class PartsList extends React.Component {
     }
 
     render() {
-
         return (
             <div className="container container-fluid">
 

@@ -82,6 +82,13 @@ class ManagerOrderList extends React.Component {
                         }
                     </table>
                 </div>
+
+                <div>Check statistics</div>
+                <button
+                    onClick={() => {
+                        OrderActions.showStatistics();
+                    }}
+                >Check</button>
             </div>
         );
     }

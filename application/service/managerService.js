@@ -131,16 +131,8 @@ function createStatistics(orders) {
             stats.requestedShutters += order.quantity;
 
             if(order.assembled === true) {
-                stats.assembledShutters++;
+                stats.assembledShutters += order.quantity;
             }
-
-            /*order.windows.forEach(function (window) {
-                stats.numberOfRequestedShutters++;
-                if (window.assembled === true) {
-                    stats.shuttersAssembled++;
-                }
-            })*/
-
         }
     });
     stats.averageQuantityPerOrder = (stats.requestedShutters / stats.submittedOrders);
