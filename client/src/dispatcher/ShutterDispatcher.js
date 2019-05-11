@@ -123,10 +123,14 @@ dispatcher.register((data)=>{
     fetch('/customer/listOwnOrders?customername=' + data.payload.payload)
         .then((response) =>{return response.json()})
         .then((result)=>{
+            if(result.errors) {
+                result = [];
+            }
+
             for(var i = 0; i < result.length; i++) {
                 if(result[i].installation == undefined) {
                     var obj = {
-                            worker: null,
+                            worker: "Empty",
                             appointment: "Empty"
                         }
                     result[i].installation = obj;

@@ -60,6 +60,7 @@ class ManagerOrderList extends React.Component {
                             <th>Worker</th>
                             <th>Installation appointment</th>
                             <th>Price</th>
+                            <th>Organize installation</th>
                         </tr>
                         {this.state.finishedOrders.map((i) => {
                             return (
@@ -74,7 +75,7 @@ class ManagerOrderList extends React.Component {
                                             onClick={() => {
                                                 OrderActions.showInstallationForm(i)
                                             }}
-                                        >Arrange installation</button>
+                                        >Organize</button>
                                     </td>
                                 </tr>);
                         })

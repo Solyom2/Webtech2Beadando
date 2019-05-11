@@ -50,6 +50,8 @@ function filterOrdersByName(customername, orders, callback) {
 function createItemsForInvoice(orders, callback) {
     var items = [];
     orders.forEach(function (element) {
+        console.log(element);
+
         items.push({
             customername : element.customername,
             address: element.address,
@@ -65,7 +67,7 @@ function createItemsForInvoice(orders, callback) {
 }
 
 function createDocument(name, items, orders, callback) {
-    if (items.length === 0) { //checks if there were items under a name, basically if there wasn't a name like so then wont create pdf
+    if (items.length === 0) {
         callback(false);
     } else {
         const document = pdfInvoice({
