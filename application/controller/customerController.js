@@ -1,6 +1,7 @@
 const express = require("express");
 var router = express.Router();
 const {check, validationResult} = require('express-validator/check');
+const logger = require("../config/logger");
 
 const cs = require("../service/customerService");
 const service = new cs();
@@ -28,7 +29,7 @@ router.post("/createOrder", [
         res.status(400).json({errors: errors.array()});
     }
     else {
-        console.log(req.body);
+        logger.info(`/createOrder Query: ${JSON.stringify(req.body)}`);
         service.createOrder(
             {
                 customername: req.body.order.customername,
@@ -58,8 +59,10 @@ router.get("/listOwnOrders", [
         res.status(400).json({errors: errors.array()});
     }
     else {
+        logger.info(`/listOwnOrders Query: ${JSON.stringify(req.body)}`);
         service.listOwnOrders(req.query.customername,
             (response) => {
+                logger.info(`/listOwnOrders response: ${JSON.stringify(response)}`);
                 res.status(200).send(response);
             });
     }
@@ -73,6 +76,7 @@ router.post("/payOrder", [
         res.status(400).json({errors: errors.array()});
     }
     else {
+        logger.info(`/payOrder Query: ${JSON.stringify(req.body)}`);
         service.payOrder(req.body._id,
             () => {
                 res.status(200).send("Payment arrived")

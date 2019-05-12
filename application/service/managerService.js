@@ -2,6 +2,8 @@ const pdfInvoice = require('pdf-invoice-hu');
 const fs = require('fs');
 
 function ManagerService(managerDao) {
+    this.logger = require("../config/logger");
+
     if (managerDao !== undefined && managerDao !== null) {
         this.dao = managerDao;
     } else {
@@ -11,12 +13,14 @@ function ManagerService(managerDao) {
 
 ManagerService.prototype.listAllOrder = function(callback) {
     this.dao.listAllOrder((orders) => {
+        this.logger.info(`${orders.length} orders were found`);
         callback(orders);
     });
 }
 
 ManagerService.prototype.listReadyOrders = function (callback) {
     this.dao.listReadyOrders((orders) => {
+        this.logger.info(`${orders.length} orders were found`);
         callback(orders);
     });
 }
@@ -29,11 +33,13 @@ ManagerService.prototype.checkPayments = function(callback) {
 
 ManagerService.prototype.arrangeInstallation = function (data, callback) {
     this.dao.arrangeInstallation(data, (response) => {
+        this.logger.info(`Order: ${data} installation was arranged`);
         callback(response);
     });
 }
 
 ManagerService.prototype.createInvoice = function (id, callback) {
+    this.logger.info(`Invoice for order ID: ${id} was generated`);
     this.dao.listReadyOrders((orders) => {
         filterOrdersByName(id, orders, (result) => {
             createItemsForInvoice(result, (items) => {
@@ -117,6 +123,7 @@ function createInvoiceFile(document, callback) {
 
 ManagerService.prototype.checkStatistics = function (callback) {
    this.dao.listAllOrder( (orders) => {
+       this.logger.info(`${orders.length} orders were processed for statistics`);
        callback(createStatistics(orders));
     });
 };

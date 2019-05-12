@@ -1,12 +1,15 @@
 const express = require("express");
 var router = express.Router();
 const {check, validationResult} = require('express-validator/check');
+const logger = require("../config/logger");
 
 const ms = require("../service/managerService");
 const service = new ms();
 
 router.get("/listAllOrder", (req, res) => {
+    logger.info(`/ listAllOrder Query: ${JSON.stringify(req.query)}`);
     service.listAllOrder((response) => {
+            logger.info(`/ listAllOrder Response: ${JSON.stringify(response)}`);
             res.status(200).send(response);
         },
         (cause) => {
@@ -15,7 +18,9 @@ router.get("/listAllOrder", (req, res) => {
 });
 
 router.get("/listReadyOrders", (req, res) => {
+    logger.info(`/listReadyOrders Query: ${JSON.stringify(req.query)}`);
     service.listReadyOrders((response) => {
+            logger.info(`/ listReadyORders Response: ${JSON.stringify(response)}`);
             res.status(200).send(response);
         },
         (cause) => {
@@ -44,6 +49,7 @@ router.post('/arrangeInstallation', [
         res.status(400).json({errors: errors.array()});
     }
     else {
+        logger.info(`/ArrangeInstallation request: ${JSON.stringify(req.body)}`);
         service.arrangeInstallation({
                 _id: req.body._id,
                 worker: req.body.worker,
@@ -66,6 +72,7 @@ router.get('/createInvoice', [
         res.status(400).json({errors: errors.array()});
     }
     else {
+        logger.info(`/createInvoice Query: ${JSON.stringify(req.query)}`);
         service.createInvoice(
             req.query._id,
             (success) => {
@@ -79,6 +86,7 @@ router.get('/createInvoice', [
 });
 
 router.get('/checkStatistics',(req, res) => {
+        logger.info(`/checkStatistics Query: ${JSON.stringify(req.query)}`);
         service.checkStatistics((response) => {
                 res.status(200).send(response);
             },

@@ -1,4 +1,6 @@
 function CustomerService(customerDao) {
+    this.logger = require("../config/logger");
+
     if (customerDao !== undefined && customerDao !== null) {
         this.dao = customerDao;
     } else {
@@ -11,6 +13,7 @@ CustomerService.prototype.createOrder = function(order, callback) {
         order = finishedOrder;
     });
     this.dao.createOrder(order, (response) => {
+        this.logger.info(`${order} order was created`);
         callback(response);
     });
 }
@@ -38,12 +41,14 @@ function calculatePrice(order) {
 
 CustomerService.prototype.listOwnOrders = function(customername, callback) {
     this.dao.listOwnOrders(customername, (orders) => {
+        this.logger.info(`${orders.length} orders  were found`);
         callback(orders);
     });
 }
 
 CustomerService.prototype.payOrder = function (id, callback) {
     this.dao.payOrder(id, (response) => {
+        this.logger.info(`Order ID: ${id} was paid`);
         callback(response);
     })
 }
