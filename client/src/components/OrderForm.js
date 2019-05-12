@@ -89,6 +89,7 @@ class OrderForm  extends React.Component {
                 <button
                     onClick={() => {
                         OrderActions.createOrder(this.state);
+                        OrderActions.listCustomerOrders(OrderStore._customername);
                     }}
                     className="btn btn-success">Submit
                 </button>

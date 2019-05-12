@@ -26,6 +26,7 @@ class OrderStore extends EventEmitter{
         averageQuantityPerOrder: 0,
         averagePricePerOrder: 0
     };
+    _customername = "";
 
     emitChange(){
         this.emit('change')

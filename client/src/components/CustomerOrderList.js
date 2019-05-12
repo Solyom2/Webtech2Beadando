@@ -1,7 +1,6 @@
 import React from "react"
 import OrderActions from "../actions/OrderActions";
 import OrderStore from "../store/OrderStore";
-import {ifStatement} from "@babel/types";
 
 class CustomerOrderList extends React.Component {
 
@@ -32,8 +31,8 @@ class CustomerOrderList extends React.Component {
 
                 <div className="row">Enter your name:
                     <input type="text" onChange={(event) => {
-                        this.state.customername = event.target.value;
-                        this.setState({customername: this.state.customername})
+                        OrderStore._customername = event.target.value;
+                        this.setState({customername: OrderStore._customername})
                     }}/>
                 </div>
 
@@ -46,6 +45,7 @@ class CustomerOrderList extends React.Component {
 
                 <table className="bg-dark table-bordered table-hover text-white">
                     <tr>
+                        <th>Address</th>
                         <th>Window length</th>
                         <th>Window width</th>
                         <th>Shutter type</th>
@@ -57,6 +57,7 @@ class CustomerOrderList extends React.Component {
                     {this.state.orders.map((i) => {
                         return (
                             <tr>
+                                <td>{i.address}</td>
                                 <td>{i.windowlength}</td>
                                 <td>{i.windowwidth}</td>
                                 <td>{i.shuttertype}</td>
