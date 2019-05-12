@@ -1,6 +1,7 @@
 import React from "react"
 import OrderActions from "../actions/OrderActions";
 import OrderStore from "../store/OrderStore";
+import CustomerOrderList from "../components/CustomerOrderList"
 
 class OrderForm  extends React.Component {
 
@@ -89,6 +90,7 @@ class OrderForm  extends React.Component {
                 <button
                     onClick={() => {
                         OrderActions.createOrder(this.state);
+                        OrderStore._customername = this.state.order.customername;
                         OrderActions.listCustomerOrders(OrderStore._customername);
                     }}
                     className="btn btn-success">Submit
