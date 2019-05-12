@@ -65,6 +65,24 @@ router.get("/listOwnOrders", [
     }
 });
 
+router.post("/payOrder", [
+    check("_id").not().isEmpty()
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({errors: errors.array()});
+    }
+    else {
+        service.payOrder(req.body._id,
+            () => {
+                res.status(200).send("Payment arrived")
+            },
+            (cause) => {
+                res.status(400).send(cause)
+            });
+    }
+});
+
 module.exports = router;
 
 

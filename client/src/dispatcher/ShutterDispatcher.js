@@ -49,6 +49,15 @@ dispatcher.register((data) => {
     fetch('/manager/listAllOrder')
         .then((response) =>{return response.json()})
         .then((result)=>{
+            for(var i = 0; i < result.length; i++) {
+                if(result[i].paid == false) {
+                    result[i].paid = "Nem";
+                }
+                else if(result[i].paid == true) {
+                    result[i].paid = "Igen";
+                }
+            }
+
             OrderStore._orders = result;
             OrderStore.emitChange();
         })
@@ -136,11 +145,31 @@ dispatcher.register((data)=>{
                         }
                     result[i].installation = obj;
                 }
+                if(result[i].paid == false) {
+                    result[i].paid = "Nem";
+                }
+                else if(result[i].paid == true) {
+                    result[i].paid = "Igen";
+                }
             }
 
             OrderStore._orders = result;
             OrderStore.emitChange();
         })
+});
+
+dispatcher.register((data) => {
+    if (data.payload.actionType !== OrderConstants.PAY_ORDER) {
+        return;
+    }
+    console.log(JSON.stringify(data.payload.payload));
+    fetch('/customer/payOrder', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(data.payload.payload)
+    })
 });
 
 dispatcher.register((data)=>{

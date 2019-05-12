@@ -33,12 +33,19 @@ function calculatePrice(order) {
     const serviceCost = 10000;
     var materialCost = order.parts.shutterlength * order.parts.shutterwidth / 100 + order.parts.pulley * 500;
     order.price = serviceCost + materialCost;
+    order.paid = false;
 }
 
 CustomerService.prototype.listOwnOrders = function(customername, callback) {
     this.dao.listOwnOrders(customername, (orders) => {
         callback(orders);
     });
+}
+
+CustomerService.prototype.payOrder = function (id, callback) {
+    this.dao.payOrder(id, (response) => {
+        callback(response);
+    })
 }
 
 module.exports = CustomerService;

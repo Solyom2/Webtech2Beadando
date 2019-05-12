@@ -17,6 +17,13 @@ class OrderActions {
         });
     }
 
+    payOrder(id){
+        ShutterDispatcher.handleViewAction({
+            actionType: OrderConstants.PAY_ORDER,
+            payload : id
+        });
+    }
+
     listUnfinishedOrders(){
         ShutterDispatcher.handleViewAction({
             actionType: OrderConstants.LIST_UNFINISHED_ORDERS,

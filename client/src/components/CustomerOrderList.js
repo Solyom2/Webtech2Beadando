@@ -53,6 +53,9 @@ class CustomerOrderList extends React.Component {
                         <th>Quantity</th>
                         <th>Installation date</th>
                         <th>Price</th>
+                        <th>Paid</th>
+                        <th>Pay order</th>
+
                     </tr>
                     {this.state.orders.map((i) => {
                         return (
@@ -65,6 +68,15 @@ class CustomerOrderList extends React.Component {
                                 <td>{i.quantity}</td>
                                 <td>{i.installation.appointment}</td>
                                 <td>{i.price}</td>
+                                <td>{i.paid}</td>
+                                <td>
+                                    <button
+                                        onClick={() => {
+                                            OrderActions.payOrder(i);
+                                            OrderActions.listCustomerOrders(this.state.customername);
+                                        }}
+                                    >Pay</button>
+                                </td>
                             </tr>);
                     })
                     }

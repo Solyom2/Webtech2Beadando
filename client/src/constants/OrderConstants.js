@@ -8,5 +8,6 @@ module.exports = {
     ARRANGE_INSTALLATION : "arrange_installation",
     CREATE_INVOICE : "create_invoice",
     CREATE_ORDER : "create_order",
-    SHOW_STATISTICS : "show_Statistics"
+    SHOW_STATISTICS : "show_Statistics",
+    PAY_ORDER : "pay_order"
 }

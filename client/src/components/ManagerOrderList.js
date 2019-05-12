@@ -35,16 +35,20 @@ class ManagerOrderList extends React.Component {
                 <div>
                     <table className="bg-dark table-bordered table-hover text-white">
                         <tr>
+                            <th>Order ID</th>
                             <th>Customer name</th>
                             <th>Customer address</th>
                             <th>Price</th>
+                            <th>Paid</th>
                         </tr>
                         {this.state.orders.map((i) => {
                             return (
                                 <tr>
+                                    <td>{i._id}</td>
                                     <td>{i.customername}</td>
                                     <td>{i.address}</td>
                                     <td>{i.price}</td>
+                                    <td>{i.paid}</td>
                                 </tr>);
                         })
                         }
@@ -55,6 +59,7 @@ class ManagerOrderList extends React.Component {
                 <div>
                     <table className="bg-dark table-bordered table-hover text-white">
                         <tr>
+                            <th>Order ID</th>
                             <th>Customer name</th>
                             <th>Customer address</th>
                             <th>Worker</th>
@@ -65,6 +70,7 @@ class ManagerOrderList extends React.Component {
                         {this.state.finishedOrders.map((i) => {
                             return (
                                 <tr>
+                                    <td>{i._id}</td>
                                     <td>{i.customername}</td>
                                     <td>{i.address}</td>
                                     <td>{i.installation.worker}</td>
