@@ -20,6 +20,7 @@
     "app-root-path": "^2.2.1",
     "pdf-invoice-hu": "^1.0.2",
     "mocha": "^6.1.4",
-    "sinon": "^7.3.2"
+    "sinon": "^7.3.2",
+    "winston": "^3.2.1"
   }
 }
