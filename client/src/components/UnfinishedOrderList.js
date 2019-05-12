@@ -27,7 +27,10 @@ class UnfinishedOrderList extends React.Component {
     render() {
         return (
             <div className="container">
-                <table className="bg-dark table-bordered table-hover text-white">
+
+                <p className="bg-primary text-center h3">Orders to be completed</p>
+
+                <table className="bg-light table-bordered table-hover text-black-50">
                     <tr>
                         <th>Customer name</th>
                         <th>Customer address</th>

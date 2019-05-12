@@ -29,7 +29,9 @@ class PartsList extends React.Component {
         return (
             <div className="container container-fluid">
 
-                <table className="bg-dark table-bordered table-hover text-white">
+                <p className="bg-primary text-center h3">Order's parts list</p>
+                
+                <table className="bg-light table-bordered table-hover text-black-50">
                     <thead>
                     <tr>
                         <th>Quantity</th>
@@ -51,7 +53,7 @@ class PartsList extends React.Component {
                 </table>
 
                 <div className="row">
-                    <button className="btn btn-info"
+                    <button className="btn btn-success"
                             onClick={() => {
                                 OrderActions.assembleShutter(this.state.order);
                                 PageActions.showWorkerPage();

@@ -29,7 +29,9 @@ class Statistics extends React.Component{
         return (
             <div className="container container-fluid">
 
-                <table className="bg-dark table-bordered table-hover text-white">
+                <p className="bg-primary text-center h3">Statistics</p>
+
+                <table className="bg-light table-bordered table-hover text-black-50">
                     <thead>
                     <tr>
                         <th>Submitted orders</th>

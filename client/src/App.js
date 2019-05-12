@@ -8,7 +8,7 @@ import PageActions from "./actions/PageActions";
 function App() {
   return (
     <div>
-        <header className="-header navbar bg-dark text-white">
+        <header className="-header navbar bg-secondary text-white text-center">
             <div className="col">
                 <div className="row">
                     <div className="col navbar-text" onClick={() => {

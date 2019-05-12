@@ -29,6 +29,8 @@ class InstallationForm extends React.Component {
         return(
             <div className="container">
 
+                <p className="bg-primary text-center h3">Installation form</p>
+
                 <div className="row">Worker
                     <input type="text" onChange={(event) => {
                         this.state.order.installation.worker = event.target.value;
@@ -57,7 +59,7 @@ class InstallationForm extends React.Component {
                         OrderActions.createInvoice(installationObj._id);
                         PageActions.showManagerPage();
                     }}
-                    className="btn btn-success">Organize installation
+                    className="btn btn-outline-primary">Organize installation
                 </button>
 
             </div>

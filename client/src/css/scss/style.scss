@@ -1,1 +1,12 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
+
+.customTd {
+  text-align: center;
+  background-color: darkred;
+}
+
+.idTd {
+  font-weight: bold;
+  font-family: "DejaVu Sans Mono";
+  color: darkred;
+}

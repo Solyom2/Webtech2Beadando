@@ -29,6 +29,8 @@ class CustomerOrderList extends React.Component {
         return (
             <div className="container">
 
+                <p className="bg-primary text-center h3">Customer Orders</p>
+
                 <div className="row">Enter your name:
                     <input type="text" onChange={(event) => {
                         OrderStore._customername = event.target.value;
@@ -43,7 +45,7 @@ class CustomerOrderList extends React.Component {
                     className="btn btn-success">Fetch my orders
                 </button>
 
-                <table className="bg-dark table-bordered table-hover text-white">
+                <table className="bg-light table-bordered table-hover text-black-50">
                     <tr>
                         <th>Address</th>
                         <th>Window length</th>
@@ -69,7 +71,7 @@ class CustomerOrderList extends React.Component {
                                 <td>{i.installation.appointment}</td>
                                 <td>{i.price}</td>
                                 <td>{i.paid}</td>
-                                <td>
+                                <td className="customTd">
                                     <button
                                         onClick={() => {
                                             OrderActions.payOrder(i);

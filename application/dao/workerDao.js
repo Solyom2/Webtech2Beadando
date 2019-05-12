@@ -3,8 +3,8 @@ const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require("mongodb").ObjectID;
 const MongoConfig = {
     database : {
-        //url : "mongodb://172.21.0.10:27017",
-        url : "mongodb://localhost:27017",
+        url : "mongodb://172.21.0.10:27017",
+        //url : "mongodb://localhost:27017",
         databaseName : "shuttershop",
         orderCollection : "orders"
     },

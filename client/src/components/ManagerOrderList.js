@@ -31,9 +31,9 @@ class ManagerOrderList extends React.Component {
         return (
             <div className="container">
 
-                <div>Every order</div>
+                <p className="bg-primary text-center h3">Every order</p>
                 <div>
-                    <table className="bg-dark table-bordered table-hover text-white">
+                    <table className="bg-light table-bordered table-hover text-black-50">
                         <tr>
                             <th>Order ID</th>
                             <th>Customer name</th>
@@ -44,7 +44,7 @@ class ManagerOrderList extends React.Component {
                         {this.state.orders.map((i) => {
                             return (
                                 <tr>
-                                    <td>{i._id}</td>
+                                    <td className="idTd">{i._id}</td>
                                     <td>{i.customername}</td>
                                     <td>{i.address}</td>
                                     <td>{i.price}</td>
@@ -55,9 +55,9 @@ class ManagerOrderList extends React.Component {
                     </table>
                 </div>
 
-                <div>Assembled orders</div>
+                <p className="bg-primary text-center h3">Assembled orders</p>
                 <div>
-                    <table className="bg-dark table-bordered table-hover text-white">
+                    <table className="bg-light table-bordered table-hover text-black-50">
                         <tr>
                             <th>Order ID</th>
                             <th>Customer name</th>
@@ -70,7 +70,7 @@ class ManagerOrderList extends React.Component {
                         {this.state.finishedOrders.map((i) => {
                             return (
                                 <tr>
-                                    <td>{i._id}</td>
+                                    <td className="idTd">{i._id}</td>
                                     <td>{i.customername}</td>
                                     <td>{i.address}</td>
                                     <td>{i.installation.worker}</td>
@@ -89,12 +89,16 @@ class ManagerOrderList extends React.Component {
                     </table>
                 </div>
 
-                <div>Check statistics</div>
-                <button
-                    onClick={() => {
-                        OrderActions.showStatistics();
-                    }}
-                >Check</button>
+                <p className="bg-primary text-center h3">Check Statistics</p>
+                <div className="col-1">
+                        <button className="btn-info"
+                            onClick={() => {
+                                OrderActions.showStatistics();
+                            }}
+                        >Check</button>
+                </div>
+
+
             </div>
         );
     }

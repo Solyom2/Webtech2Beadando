@@ -38,6 +38,8 @@ class OrderForm  extends React.Component {
         return(
             <div className="container">
 
+                <p className="bg-primary text-center h3">Shutter order form</p>
+
                 <div className="row">Customer name
                     <input type="text" onChange={(event) => {
                         this.state.order.customername = event.target.value;

@@ -7569,5 +7569,13 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
+.customTd {
+  text-align: center;
+  background-color: darkred; }
+
+.idTd {
+  font-weight: bold;
+  font-family: "DejaVu Sans Mono";
+  color: darkred; }
 
 /*# sourceMappingURL=style.css.map */
