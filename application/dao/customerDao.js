@@ -2,7 +2,7 @@ const assert = require("assert");
 const MongoClient = require("mongodb").MongoClient;
 const MongoConfig = {
     database : {
-        url : "mongodb://localhost:27017",
+        url : "mongodb://172.21.0.10:27017",
         databaseName : "shuttershop",
         orderCollection : "orders"
     },

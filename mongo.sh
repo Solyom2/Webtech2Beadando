@@ -19,14 +19,16 @@
 MONGO_HOST_IP=172.21.0.10
 MONGO_NETWORK_MASK=172.21.0.0/16
 MONGO_NETWORK_NAME=mongodb-network
+MONGO_CONTAINER_NAME=mongodb-shutters
 
 docker network create -d bridge --subnet $MONGO_NETWORK_MASK $MONGO_NETWORK_NAME
 
-docker run --detach --network $MONGO_NETWORK_NAME --ip $MONGO_HOST_IP mongo
+docker stop $MONGO_CONTAINER_NAME
+docker rm $MONGO_CONTAINER_NAME
+docker run --detach --name $MONGO_CONTAINER_NAME --network $MONGO_NETWORK_NAME --ip $MONGO_HOST_IP mongo
 
 chmod +r *.json
 
-mongoimport --host $MONGO_HOST_IP --db shutter_shop --collection orders orders.json
-mongoimport --host $MONGO_HOST_IP --db shutter_shop --collection completed_orders completed_orders.json
+mongoimport --host $MONGO_HOST_IP --db shuttershop --collection orders orders.json
 
 mongo --host $MONGO_HOST_IP
