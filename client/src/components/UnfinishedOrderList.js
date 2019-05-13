@@ -32,22 +32,18 @@ class UnfinishedOrderList extends React.Component {
 
                 <table className="bg-light table-bordered table-hover text-black-50">
                     <tr>
+                        <th>Order ID</th>
                         <th>Customer name</th>
                         <th>Customer address</th>
-                        <th>Shutter type</th>
-                        <th>Shutter color</th>
-                        <th>Quantity</th>
                     </tr>
                     {this.state.orders.map((i) => {
                         return (
                             <tr onClick={() => {
                                 OrderActions.listParts(i._id)
                             }}>
+                                <td>{i._id}</td>
                                 <td>{i.customername}</td>
                                 <td>{i.address}</td>
-                                <td>{i.shuttertype}</td>
-                                <td>{i.shuttercolor}</td>
-                                <td>{i.quantity}</td>
                             </tr>);
                     })
                     }

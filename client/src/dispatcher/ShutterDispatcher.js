@@ -192,6 +192,7 @@ dispatcher.register((data)=>{
         .then((response) =>{return response.json()})
         .then((result)=>{
             OrderStore._selectedParts = result[0];
+            console.log(result[0]);
             OrderStore.emitChange();
         })
 

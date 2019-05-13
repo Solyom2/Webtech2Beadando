@@ -13,10 +13,7 @@ class OrderStore extends EventEmitter{
     };
     _selectedParts = {
         _id: "",
-        shuttertype: "",
-        shuttercolor: "",
-        quantity: null,
-        parts: { shutterlength: null, shutterwidth: null, pulley: null }
+        parts: []
     };
     _stats = {
         submittedOrders: 0,

@@ -42,6 +42,20 @@ class PartsList extends React.Component {
                         <th>Pulley</th>
                     </tr>
                     </thead>
+
+                    {this.state.order.parts.map((i) => {
+                        return (
+                            <tr>
+                                <td>{i.quantity}</td>
+                                <td>{i.shuttertype}</td>
+                                <td>{i.shuttercolor}</td>
+                                <td>{i.shutterlength}</td>
+                                <td>{i.shutterwidth}</td>
+                                <td>{i.pulley}</td>
+                            </tr>);
+                    })
+                    }
+
                     <tr>
                         <td>{this.state.order.quantity}</td>
                         <td>{this.state.order.shuttertype}</td>

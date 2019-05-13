@@ -10,6 +10,20 @@ class PageActions {
         });
     }
 
+    showCustomerForm(){
+        ShutterDispatcher.handleViewAction({
+            actionType: PageConstants.SHOW_CUSTOMER_FORM,
+            payload : null
+        });
+    }
+
+    showCustomerList(){
+        ShutterDispatcher.handleViewAction({
+            actionType: PageConstants.SHOW_CUSTOMER_LIST,
+            payload : null
+        });
+    }
+
     showManagerPage(){
         ShutterDispatcher.handleViewAction({
             actionType: PageConstants.SHOW_MANAGER_PAGE,
