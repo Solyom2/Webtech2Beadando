@@ -30,7 +30,6 @@ function find(findParams, projection, callback) {
 }
 
 function listAllOrder(callback) {
-    //var projection = {projection: {_id: 0}};
     var projection = {projection: {}};
     find({}, projection, (result) => {
         callback(result);
@@ -38,7 +37,7 @@ function listAllOrder(callback) {
 }
 
 function listReadyOrders(callback) {
-    var projection = {projection: {_id : 1, customername:  1, address: 1, shuttertype: 1, shuttercolor: 1, quantity: 1, price: 1, installation: 1}};
+    var projection = {projection: {}};
     find({assembled: true}, projection, (result) => {
         callback(result)
     });

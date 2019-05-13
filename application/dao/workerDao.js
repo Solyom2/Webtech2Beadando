@@ -31,14 +31,14 @@ function find(findParams, projection, callback) {
 }
 
 function listUnassembledOrders(callback) {
-    var projection = {projection: {price: 0, windowlength: 0, windowwidth: 0}};
+    var projection = {projection: {price: 0, paid: 0}};
     find({assembled: false}, projection, (result) => {
         callback(result)
     });
 }
 
 function listParts(id, callback) {
-    var projection = {projection: {_id: 1, shuttertype: 1, shuttercolor: 1, quantity: 1,  parts: 1}};
+    var projection = {projection: {_id: 1, shuttertype: 1, parts: 1}};
     find({_id: new ObjectID(id)}, projection, (result) => {
         callback(result);
     });

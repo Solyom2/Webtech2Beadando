@@ -41,7 +41,7 @@ ManagerService.prototype.arrangeInstallation = function (data, callback) {
 ManagerService.prototype.createInvoice = function (id, callback) {
     this.logger.info(`Invoice for order ID: ${id} was generated`);
     this.dao.listReadyOrders((orders) => {
-        filterOrdersByName(id, orders, (result) => {
+        filterOrdersById(id, orders, (result) => {
             createItemsForInvoice(result, (items) => {
                 createDocument(items, result, (document) => {
                     createInvoiceFile(document, (success) => {
@@ -53,10 +53,11 @@ ManagerService.prototype.createInvoice = function (id, callback) {
     });
 }
 
-function filterOrdersByName(id, orders, callback) {
+function filterOrdersById(id, orders, callback) {
     var result = orders.filter(function (order) {
         return order._id == id;
     });
+    console.log(result);
     callback(result);
 }
 
@@ -64,11 +65,16 @@ function createItemsForInvoice(orders, callback) {
     var items = [];
     orders.forEach(function (element) {
 
+        var sumQuantity = 0;
+        for(let i = 0; i < element.parts.length; i++) {
+            sumQuantity += element.parts[i].quantity;
+        }
+
         items.push({
             customername : element.customername,
             address: element.address,
-            description: 'Anyag: ' + element.shuttertype + ' Szín: ' + element.shuttercolor,
-            quantity: element.quantity,
+            description: "Felszerelés időpontja: " + element.installation.appointment,
+            quantity: sumQuantity,
             unit_price: element.price,
             net_price: element.price - (element.price * 0.20),
             vat_amount: element.price - (element.price * 0.80),
@@ -139,21 +145,18 @@ function createStatistics(orders) {
     };
 
     orders.forEach(function (order) {
-        if (order.parts) {
-            stats.submittedOrders++;
-            stats.totalPriceOfOrders += order.price;
-            stats.requestedShutters += order.quantity;
+        stats.submittedOrders++;
+        stats.totalPriceOfOrders += order.price;
 
+        for(let i = 0; i < order.parts.length; i++) {
+            stats.requestedShutters += order.parts[i].quantity;
             if(order.assembled === true) {
-                stats.assembledShutters += order.quantity;
+                stats.assembledShutters += order.parts[i].quantity;
             }
         }
     });
     stats.averageQuantityPerOrder = (stats.requestedShutters / stats.submittedOrders).toFixed(2);
     stats.averagePricePerOrder = (stats.totalPriceOfOrders / stats.submittedOrders).toFixed(2);
-
-    console.log(stats);
-
     return stats;
 }
 
