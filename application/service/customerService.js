@@ -25,16 +25,29 @@ function finishOrder(order, callback) {
 }
 
 function processParts(order) {
-    order.parts = {
-        shutterlength : order.windowlength + 30,
-        shutterwidth: order.windowwidth + 30,
-        pulley: order.quantity * 2
+    order.parts = [];
+    for(let i = 0; i < order.windows.length; i++) {
+        order["parts"].push(
+            {
+                shutterlength : order.windows[i].windowlength + 30,
+                shutterwidth: order.windows[i].windowwidth + 30,
+                pulley: order.windows[i].quantity * 2,
+                shuttertype: order.windows[i].shuttertype,
+                shuttercolor: order.windows[i].shuttercolor,
+                quantity: order.windows[i].quantity
+            }
+        );
     }
+    order.assembled = false;
+    delete order.windows;
 }
 
 function calculatePrice(order) {
-    const serviceCost = 10000;
-    var materialCost = order.parts.shutterlength * order.parts.shutterwidth / 100 + order.parts.pulley * 500;
+    const serviceCost = 5000;
+    var materialCost = 0;
+    for(let i = 0; i < order.parts.length; i++) {
+        materialCost += (order.parts[i].shutterlength * order.parts[i].shutterwidth / 100) * order.parts[i].quantity + order.parts[i].pulley * 400;
+    }
     order.price = serviceCost + materialCost;
     order.paid = false;
 }

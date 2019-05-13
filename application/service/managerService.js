@@ -16,27 +16,27 @@ ManagerService.prototype.listAllOrder = function(callback) {
         this.logger.info(`${orders.length} orders were found`);
         callback(orders);
     });
-}
+};
 
 ManagerService.prototype.listReadyOrders = function (callback) {
     this.dao.listReadyOrders((orders) => {
         this.logger.info(`${orders.length} orders were found`);
         callback(orders);
     });
-}
+};
 
 ManagerService.prototype.checkPayments = function(callback) {
     this.dao.checkPayments((orders) => {
         callback(orders);
     });
-}
+};
 
 ManagerService.prototype.arrangeInstallation = function (data, callback) {
     this.dao.arrangeInstallation(data, (response) => {
         this.logger.info(`Order: ${data} installation was arranged`);
         callback(response);
     });
-}
+};
 
 ManagerService.prototype.createInvoice = function (id, callback) {
     this.logger.info(`Invoice for order ID: ${id} was generated`);

@@ -19,7 +19,7 @@
 MONGO_HOST_IP=172.21.0.10
 MONGO_NETWORK_MASK=172.21.0.0/16
 MONGO_NETWORK_NAME=mongodb-network
-MONGO_CONTAINER_NAME=mongodb-shutters
+MONGO_CONTAINER_NAME=mongodb-shuttershop
 
 docker network create -d bridge --subnet $MONGO_NETWORK_MASK $MONGO_NETWORK_NAME
 

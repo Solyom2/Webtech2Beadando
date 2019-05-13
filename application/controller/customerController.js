@@ -1,6 +1,7 @@
 const express = require("express");
 var router = express.Router();
 const {check, validationResult} = require('express-validator/check');
+//const checkBody = check(['body']);
 const logger = require("../config/logger");
 
 const cs = require("../service/customerService");
@@ -9,19 +10,16 @@ const service = new cs();
 router.post("/createOrder", [
     check("order.customername").not().isEmpty(),
     check("order.address").not().isEmpty(),
-    check("order.windowlength").not().isEmpty(),
-    check("order.windowwidth").not().isEmpty(),
-    check("order.shuttertype").not().isEmpty(),
-    check("order.shuttercolor").not().isEmpty(),
-    check("order.quantity").not().isEmpty(),
+    check("order.windows").not().isEmpty(),
+    //body('items').exists().isInt(),
 
     check("order.customername").isString(),
     check("order.address").isString(),
-    check("order.windowlength").isInt(),
+    /*check("order.windowlength").isInt(),
     check("order.windowwidth").isInt(),
     check("order.shuttertype").isString(),
     check("order.shuttercolor").isString(),
-    check("order.quantity").isInt()
+    check("order.quantity").isInt()*/
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -34,12 +32,7 @@ router.post("/createOrder", [
             {
                 customername: req.body.order.customername,
                 address: req.body.order.address,
-                windowlength: parseInt(req.body.order.windowlength),
-                windowwidth: parseInt(req.body.order.windowwidth),
-                shuttertype: req.body.order.shuttertype,
-                shuttercolor: req.body.order.shuttercolor,
-                quantity: parseInt(req.body.order.quantity),
-                assembled: false
+                windows: req.body.order.windows,
             },
             () => {
                 res.status(200).send("Order processed!")
