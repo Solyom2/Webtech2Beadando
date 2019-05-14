@@ -12,7 +12,7 @@ function App() {
             <div className="col">
                 <div className="row">
                     <div className="col navbar-text" onClick={() => {
-                        PageActions.showCustomerPage();
+                        PageActions.showCustomerForm();
                     }}>Customer page
                     </div>
 

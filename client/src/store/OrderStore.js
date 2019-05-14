@@ -15,6 +15,9 @@ class OrderStore extends EventEmitter{
         _id: "",
         parts: []
     };
+    _submittedOrder = {
+        order: {}
+    };
     _stats = {
         submittedOrders: 0,
         totalPriceOfOrders: 0,

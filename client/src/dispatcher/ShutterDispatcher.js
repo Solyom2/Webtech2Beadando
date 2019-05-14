@@ -7,6 +7,8 @@ import PageConstants from "../constants/PageConstants";
 import OrderStore from "../store/OrderStore";
 import ManagerOrderList from "../components/ManagerOrderList";
 import OrderForm from "../components/OrderForm";
+import CustomerDetailForm from "../components/CustomerDetailForm";
+import WindowsDetailForm from "../components/WindowsDetailForm";
 import CustomerOrderList from "../components/CustomerOrderList";
 import UnfinishedOrderList from "../components/UnfinishedOrderList";
 import PartsList from "../components/PartsList";
@@ -37,6 +39,21 @@ dispatcher.register((data) => {
 
     ReactDOM.render(
         React.createElement(OrderForm),
+        document.getElementById("formDiv")
+    );
+});
+
+dispatcher.register((data) => {
+    if (data.payload.actionType !== PageConstants.SHOW_CUSTOMER_FORM) {
+        return;
+    }
+    ReactDOM.render(
+        React.createElement("div"),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement(CustomerDetailForm),
         document.getElementById("formDiv")
     );
 });
