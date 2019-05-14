@@ -47,6 +47,13 @@ dispatcher.register((data) => {
     if (data.payload.actionType !== PageConstants.SHOW_CUSTOMER_FORM) {
         return;
     }
+    
+    OrderStore._submittedOrder = {
+        order: {
+            windows : []
+        }
+    };
+    
     ReactDOM.render(
         React.createElement("div"),
         document.getElementById("listDiv")
@@ -54,6 +61,38 @@ dispatcher.register((data) => {
 
     ReactDOM.render(
         React.createElement(CustomerDetailForm),
+        document.getElementById("formDiv")
+    );
+});
+
+dispatcher.register((data) => {
+    if (data.payload.actionType !== PageConstants.SHOW_WINDOW_FORM) {
+        return;
+    }
+
+    ReactDOM.render(
+        React.createElement("div"),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement(WindowsDetailForm),
+        document.getElementById("formDiv")
+    );
+});
+
+dispatcher.register((data) => {
+    if (data.payload.actionType !== PageConstants.SHOW_CUSTOMER_LIST) {
+        return;
+    }
+
+    ReactDOM.render(
+        React.createElement(CustomerOrderList),
+        document.getElementById("listDiv")
+    );
+
+    ReactDOM.render(
+        React.createElement("div"),
         document.getElementById("formDiv")
     );
 });

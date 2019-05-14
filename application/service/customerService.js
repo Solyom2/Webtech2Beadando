@@ -29,12 +29,12 @@ function processParts(order) {
     for(let i = 0; i < order.windows.length; i++) {
         order["parts"].push(
             {
-                shutterlength : order.windows[i].windowlength + 30,
-                shutterwidth: order.windows[i].windowwidth + 30,
+                shutterlength : parseInt(order.windows[i].windowlength) + 30,
+                shutterwidth: parseInt(order.windows[i].windowwidth) + 30,
                 pulley: order.windows[i].quantity * 2,
                 shuttertype: order.windows[i].shuttertype,
                 shuttercolor: order.windows[i].shuttercolor,
-                quantity: order.windows[i].quantity
+                quantity: parseInt(order.windows[i].quantity)
             }
         );
     }

@@ -1,6 +1,7 @@
 import React from "react"
 import OrderActions from "../actions/OrderActions";
 import OrderStore from "../store/OrderStore";
+import PageActions from "../actions/PageActions";
 
 class CustomerOrderList extends React.Component {
 
@@ -29,12 +30,28 @@ class CustomerOrderList extends React.Component {
         return (
             <div className="container">
 
+                <header className="-header navbar bg-light text-black-50 text-center">
+                    <div className="col">
+                        <div className="row">
+                            <div className="col navbar-text" onClick={() => {
+                                PageActions.showCustomerForm();
+                            }}>Order form
+                            </div>
+
+                            <div className="col navbar-text" onClick={() => {
+                                PageActions.showCustomerList();
+                            }}>Order list
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
                 <p className="bg-primary text-center h3">Customer Orders</p>
 
                 <div className="row">Enter your name:
                     <input type="text" onChange={(event) => {
-                        OrderStore._customername = event.target.value;
-                        this.setState({customername: OrderStore._customername})
+                        this.state.customername = event.target.value;
+                        this.setState({customername: this.state.customername})
                     }}/>
                 </div>
 
@@ -48,11 +65,6 @@ class CustomerOrderList extends React.Component {
                 <table className="bg-light table-bordered table-hover text-black-50">
                     <tr>
                         <th>Address</th>
-                        <th>Window length</th>
-                        <th>Window width</th>
-                        <th>Shutter type</th>
-                        <th>Shutter color</th>
-                        <th>Quantity</th>
                         <th>Installation date</th>
                         <th>Price</th>
                         <th>Paid</th>
@@ -63,11 +75,6 @@ class CustomerOrderList extends React.Component {
                         return (
                             <tr>
                                 <td>{i.address}</td>
-                                <td>{i.windowlength}</td>
-                                <td>{i.windowwidth}</td>
-                                <td>{i.shuttertype}</td>
-                                <td>{i.shuttercolor}</td>
-                                <td>{i.quantity}</td>
                                 <td>{i.installation.appointment}</td>
                                 <td>{i.price}</td>
                                 <td>{i.paid}</td>

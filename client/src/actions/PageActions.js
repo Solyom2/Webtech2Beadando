@@ -17,6 +17,13 @@ class PageActions {
         });
     }
 
+    showWindowForm(){
+        ShutterDispatcher.handleViewAction({
+            actionType: PageConstants.SHOW_WINDOW_FORM,
+            payload : null
+        });
+    }
+
     showCustomerList(){
         ShutterDispatcher.handleViewAction({
             actionType: PageConstants.SHOW_CUSTOMER_LIST,

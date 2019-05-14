@@ -26,7 +26,6 @@ class CustomerDetailForm extends React.Component {
         OrderStore.removeChangeListener(this._onChange)
     }
 
-    //TODO innen továbblépni a WindiowsDetailForm-ra
     render() {
         return(
             <div className="container">
@@ -40,32 +39,31 @@ class CustomerDetailForm extends React.Component {
                             </div>
 
                             <div className="col navbar-text" onClick={() => {
-                                //PageActions.showManagerPage();
+                                PageActions.showCustomerList();
                             }}>Order list
                             </div>
                         </div>
                     </div>
                 </header>
                 
-                <p className="bg-primary text-center h3">Shutter order form</p>
+                <p className="bg-primary text-center h3">Customer details</p>
 
                 <div className="row">Customer name
                     <input type="text" onChange={(event) => {
                         OrderStore._submittedOrder.order.customername = event.target.value;
-                        //this.setState({order: this.state.order})
                     }}/>
                 </div>
 
                 <div className="row">Address
                     <input type="text" onChange={(event) => {
-                        OrderStore._submittedOrder.order.customername = event.target.value;
+                        OrderStore._submittedOrder.order.address = event.target.value;
                         //this.setState({order: this.state.order})
                     }}/>
                 </div>
 
                 <button
                     onClick={() => {
-
+                        PageActions.showWindowForm();
                     }}
                     className="btn btn-success">Continue
                 </button>

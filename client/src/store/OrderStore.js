@@ -16,7 +16,9 @@ class OrderStore extends EventEmitter{
         parts: []
     };
     _submittedOrder = {
-        order: {}
+        order: {
+            windows : []
+        }
     };
     _stats = {
         submittedOrders: 0,
@@ -26,7 +28,6 @@ class OrderStore extends EventEmitter{
         averageQuantityPerOrder: 0,
         averagePricePerOrder: 0
     };
-    _customername = "";
 
     emitChange(){
         this.emit('change')
