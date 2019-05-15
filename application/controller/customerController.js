@@ -20,11 +20,6 @@ router.post("/createOrder", [
     check("order.windows.*.shuttertype").isString(),
     check("order.windows.*.shuttercolor").isString(),
     check("order.windows.*.quantity").isInt(),
-    /*check("order.windowlength").isInt(),
-    check("order.windowwidth").isInt(),
-    check("order.shuttertype").isString(),
-    check("order.shuttercolor").isString(),
-    check("order.quantity").isInt()*/
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
