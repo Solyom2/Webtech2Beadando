@@ -51,6 +51,7 @@ class WindowsDetailForm extends React.Component{
 
                 <p className="bg-primary text-center h3">Windows deatils</p>
 
+                <form id="windowform">
                 <div className="row">Window height
                     <input type="number" onChange={(event) => {
                         this.state.windowlength = event.target.value;
@@ -61,7 +62,7 @@ class WindowsDetailForm extends React.Component{
                 <div className="row">Window width
                     <input type="number" onChange={(event) => {
                         this.state.windowwidth = event.target.value;
-                        this.setState({windowwidth: this.state.windowlength})
+                        this.setState({windowwidth: this.state.windowwidth})
                     }}/>
                 </div>
 
@@ -82,13 +83,22 @@ class WindowsDetailForm extends React.Component{
                 <div className="row">Quantity
                     <input type="number" onChange={(event) => {
                         this.state.quantity = event.target.value;
-                        this.setState({quantity: this.state.quantity})
+                        this.setState({quantity: this.state.quantity});
+
                     }}/>
                 </div>
+                </form>
 
                 <button
                     onClick={() => {
+                        console.log(this.state);
                         OrderStore._submittedOrder.order.windows.push(this.state);
+                        this.setState({windowlength: null,
+                            windowwidth: null,
+                            shuttertype: null,
+                            shuttercolor: null,
+                            quantity: null})
+                        document.getElementById("windowform").reset();
                     }}
                     className="btn-info">Add window
                 </button>
