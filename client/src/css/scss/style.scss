@@ -1,8 +1,14 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
-.customTd {
+.notPaidTd {
   text-align: center;
   background-color: darkred;
+}
+
+.paidTd {
+  text-align: center;
+  background-color: forestgreen;
+  font-weight: bold;
 }
 
 .idTd {

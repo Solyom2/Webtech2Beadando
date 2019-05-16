@@ -26,6 +26,8 @@ class CustomerOrderList extends React.Component {
         OrderStore.removeChangeListener(this._onChange)
     }
 
+
+
     render() {
         return (
             <div className="container">
@@ -72,23 +74,32 @@ class CustomerOrderList extends React.Component {
 
                     </tr>
                     {this.state.orders.map((i) => {
+
+                        let paidTD;
+                        if (i.paid === "Nem") {
+                            paidTD = <td className="notPaidTd">
+                                <button
+                                    onClick={() => {
+                                        OrderActions.payOrder(i);
+                                        OrderActions.listCustomerOrders(this.state.customername);
+                                    }}
+                                >Pay</button>
+                            </td>
+                        } else {
+                            paidTD = <td className="paidTd">Paid</td>
+                        }
+
                         return (
                             <tr>
                                 <td>{i.address}</td>
                                 <td>{i.installation.appointment}</td>
                                 <td>{i.price}</td>
                                 <td>{i.paid}</td>
-                                <td className="customTd">
-                                    <button
-                                        onClick={() => {
-                                            OrderActions.payOrder(i);
-                                            OrderActions.listCustomerOrders(this.state.customername);
-                                        }}
-                                    >Pay</button>
-                                </td>
+                                {paidTD}
                             </tr>);
                     })
                     }
+
                 </table>
             </div>
         );
