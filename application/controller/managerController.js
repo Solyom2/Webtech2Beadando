@@ -42,10 +42,13 @@ router.post('/arrangeInstallation', [
     check("worker").not().isEmpty(),
     check("appointment").not().isEmpty(),
     check("worker").isString(),
-    check("appointment").isString()
+    check("appointment").isString(),
+    check("worker").not().equals("Empty"),
+    check("appointment").not().equals("Empty")
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+        console.log("hiba");
         res.status(400).json({errors: errors.array()});
     }
     else {

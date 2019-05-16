@@ -29,21 +29,6 @@ class ShutterDispatcher extends Dispatcher{
 const dispatcher = new ShutterDispatcher();
 
 dispatcher.register((data) => {
-    if (data.payload.actionType !== PageConstants.SHOW_CUSTOMER_PAGE) {
-        return;
-    }
-    ReactDOM.render(
-        React.createElement(CustomerOrderList),
-        document.getElementById("listDiv")
-    );
-
-    ReactDOM.render(
-        React.createElement(OrderForm),
-        document.getElementById("formDiv")
-    );
-});
-
-dispatcher.register((data) => {
     if (data.payload.actionType !== PageConstants.SHOW_CUSTOMER_FORM) {
         return;
     }

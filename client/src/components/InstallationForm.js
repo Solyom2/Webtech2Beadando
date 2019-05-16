@@ -9,7 +9,8 @@ class InstallationForm extends React.Component {
         super(props);
         this._onChange = this._onChange.bind(this);
         this.state = {
-            order : OrderStore._selectedOrder
+            order : OrderStore._selectedOrder,
+            isChecked : false
         };
     }
 
@@ -31,18 +32,27 @@ class InstallationForm extends React.Component {
 
                 <p className="bg-primary text-center h3">Installation form</p>
 
-                <div className="row">Worker
+                <div className="row">Worker:
                     <input type="text" onChange={(event) => {
                         this.state.order.installation.worker = event.target.value;
                         this.setState({order: this.state.order})
                     }}/>
                 </div>
 
-                <div className="row">Date
+                <div className="row">Date:
                     <input type="date" onChange={(event) => {
                         this.state.order.installation.appointment = event.target.value;
                         this.setState({order: this.state.order})
                     }}/>
+                </div>
+
+                <div className="row">Create invoice:
+                    <input type="checkbox"
+                           checked={this.state.isChecked}
+                           onChange={() => {
+                               this.setState({isChecked : !this.state.isChecked})
+                           }}
+                    />
                 </div>
 
                 <button
@@ -52,11 +62,14 @@ class InstallationForm extends React.Component {
                             _id: this.state.order._id,
                             worker: this.state.order.installation.worker,
                             appointment: this.state.order.installation.appointment
-                        }
+                        };
                         console.log(installationObj);
+                        console.log(this.state.isChecked);
 
                         OrderActions.arrangeInstallation(installationObj);
-                        OrderActions.createInvoice(installationObj._id);
+                        if(this.state.isChecked === true) {
+                            OrderActions.createInvoice(installationObj._id);
+                        }
                         PageActions.showManagerPage();
                     }}
                     className="btn btn-outline-primary">Organize installation

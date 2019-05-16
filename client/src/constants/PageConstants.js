@@ -1,5 +1,4 @@
 module.exports = {
-    SHOW_CUSTOMER_PAGE : "show_customer_page",
     SHOW_CUSTOMER_FORM : "show_customer_form",
     SHOW_WINDOW_FORM : "show_window_form",
     SHOW_CUSTOMER_LIST : "show_customer_list",

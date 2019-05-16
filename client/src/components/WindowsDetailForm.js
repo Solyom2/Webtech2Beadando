@@ -51,6 +51,8 @@ class WindowsDetailForm extends React.Component{
 
                 <p className="bg-primary text-center h3">Windows deatils</p>
 
+                <p className="bg-info text-center font-italic h4">Number of orders: {OrderStore._submittedOrder.order.windows.length}</p>
+
                 <form id="windowform">
                 <div className="row">Window height
                     <input type="number" onChange={(event) => {

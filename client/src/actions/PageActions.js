@@ -3,13 +3,6 @@ import ShutterDispatcher from "../dispatcher/ShutterDispatcher";
 
 class PageActions {
 
-    showCustomerPage(){
-        ShutterDispatcher.handleViewAction({
-            actionType: PageConstants.SHOW_CUSTOMER_PAGE,
-            payload : null
-        });
-    }
-
     showCustomerForm(){
         ShutterDispatcher.handleViewAction({
             actionType: PageConstants.SHOW_CUSTOMER_FORM,
