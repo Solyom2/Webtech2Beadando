@@ -6,7 +6,6 @@ import OrderConstants from "../constants/OrderConstants";
 import PageConstants from "../constants/PageConstants";
 import OrderStore from "../store/OrderStore";
 import ManagerOrderList from "../components/ManagerOrderList";
-import OrderForm from "../components/OrderForm";
 import CustomerDetailForm from "../components/CustomerDetailForm";
 import WindowsDetailForm from "../components/WindowsDetailForm";
 import CustomerOrderList from "../components/CustomerOrderList";
@@ -92,10 +91,10 @@ dispatcher.register((data) => {
         .then((result)=>{
             for(var i = 0; i < result.length; i++) {
                 if(result[i].paid == false) {
-                    result[i].paid = "Nem";
+                    result[i].paid = "No";
                 }
                 else if(result[i].paid == true) {
-                    result[i].paid = "Igen";
+                    result[i].paid = "Yes";
                 }
             }
 
@@ -187,10 +186,10 @@ dispatcher.register((data)=>{
                     result[i].installation = obj;
                 }
                 if(result[i].paid == false) {
-                    result[i].paid = "Nem";
+                    result[i].paid = "No";
                 }
                 else if(result[i].paid == true) {
-                    result[i].paid = "Igen";
+                    result[i].paid = "Yes";
                 }
             }
 

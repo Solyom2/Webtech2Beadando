@@ -32,8 +32,8 @@ class ManagerOrderList extends React.Component {
             <div className="container">
 
                 <p className="bg-primary text-center h3">Every order</p>
-                <div>
-                    <table className="bg-light table-bordered table-hover text-black-50">
+                <div className="pb-2">
+                    <table className="bg-light table-bordered table-hover text-black-50 m-auto">
                         <tr>
                             <th>Order ID</th>
                             <th>Customer name</th>
@@ -56,8 +56,8 @@ class ManagerOrderList extends React.Component {
                 </div>
 
                 <p className="bg-primary text-center h3">Assembled orders</p>
-                <div>
-                    <table className="bg-light table-bordered table-hover text-black-50">
+                <div className="pb-2">
+                    <table className="bg-light table-bordered table-hover text-black-50 m-auto">
                         <tr>
                             <th>Order ID</th>
                             <th>Customer name</th>
@@ -76,7 +76,7 @@ class ManagerOrderList extends React.Component {
                                     <td>{i.installation.worker}</td>
                                     <td>{i.installation.appointment}</td>
                                     <td>{i.price}</td>
-                                    <td>
+                                    <td className="text-center">
                                         <button
                                             onClick={() => {
                                                 OrderActions.showInstallationForm(i)
@@ -90,7 +90,7 @@ class ManagerOrderList extends React.Component {
                 </div>
 
                 <p className="bg-primary text-center h3">Check Statistics</p>
-                <div className="col-1">
+                <div className="col-sm-12 text-center">
                         <button className="btn-info"
                             onClick={() => {
                                 OrderActions.showStatistics();

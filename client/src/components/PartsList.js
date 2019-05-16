@@ -30,43 +30,44 @@ class PartsList extends React.Component {
             <div className="container container-fluid">
 
                 <p className="bg-primary text-center h3">Order's parts list</p>
-                
-                <table className="bg-light table-bordered table-hover text-black-50">
-                    <thead>
-                    <tr>
-                        <th>Quantity</th>
-                        <th>Shutter type</th>
-                        <th>Shutter color</th>
-                        <th>Shutter length</th>
-                        <th>Shutter width</th>
-                        <th>Pulley</th>
-                    </tr>
-                    </thead>
 
-                    {this.state.order.parts.map((i) => {
-                        return (
-                            <tr>
-                                <td>{i.quantity}</td>
-                                <td>{i.shuttertype}</td>
-                                <td>{i.shuttercolor}</td>
-                                <td>{i.shutterlength}</td>
-                                <td>{i.shutterwidth}</td>
-                                <td>{i.pulley}</td>
-                            </tr>);
-                    })
-                    }
+                <div className="pb-2">
+                    <table className="bg-light table-bordered table-hover text-black-50 m-auto">
+                        <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Shutter type</th>
+                            <th>Shutter color</th>
+                            <th>Shutter length</th>
+                            <th>Shutter width</th>
+                            <th>Pulley</th>
+                        </tr>
+                        </thead>
 
-                    <tr>
-                        <td>{this.state.order.quantity}</td>
-                        <td>{this.state.order.shuttertype}</td>
-                        <td>{this.state.order.shuttercolor}</td>
-                        <td>{this.state.order.parts.shutterlength}</td>
-                        <td>{this.state.order.parts.shutterwidth}</td>
-                        <td>{this.state.order.parts.pulley}</td>
-                    </tr>
-                </table>
+                        {this.state.order.parts.map((i) => {
+                            return (
+                                <tr>
+                                    <td>{i.quantity}</td>
+                                    <td>{i.shuttertype}</td>
+                                    <td>{i.shuttercolor}</td>
+                                    <td>{i.shutterlength}</td>
+                                    <td>{i.shutterwidth}</td>
+                                    <td>{i.pulley}</td>
+                                </tr>);
+                        })
+                        }
+                        <tr>
+                            <td>{this.state.order.quantity}</td>
+                            <td>{this.state.order.shuttertype}</td>
+                            <td>{this.state.order.shuttercolor}</td>
+                            <td>{this.state.order.parts.shutterlength}</td>
+                            <td>{this.state.order.parts.shutterwidth}</td>
+                            <td>{this.state.order.parts.pulley}</td>
+                        </tr>
+                    </table>
+                </div>
 
-                <div className="row">
+                <div className="col-sm-auto text-center">
                     <button className="btn btn-success"
                             onClick={() => {
                                 OrderActions.assembleShutter(this.state.order);

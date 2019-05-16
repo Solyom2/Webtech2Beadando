@@ -48,25 +48,27 @@ class CustomerDetailForm extends React.Component {
                 
                 <p className="bg-primary text-center h3">Customer details</p>
 
-                <div className="row">Customer name
+                <div className="col-sm-auto text-center p-1">Customer name:
                     <input type="text" onChange={(event) => {
                         OrderStore._submittedOrder.order.customername = event.target.value;
                     }}/>
                 </div>
 
-                <div className="row">Address
+                <div className="col-sm-auto text-center p-1">Address:
                     <input type="text" onChange={(event) => {
                         OrderStore._submittedOrder.order.address = event.target.value;
-                        //this.setState({order: this.state.order})
                     }}/>
                 </div>
 
-                <button
-                    onClick={() => {
-                        PageActions.showWindowForm();
-                    }}
-                    className="btn btn-success">Continue
-                </button>
+                <div className="col-sm-auto text-center p-1">
+                    <button
+                        onClick={() => {
+                            PageActions.showWindowForm();
+                        }}
+                        className="btn btn-success">Continue
+                    </button>
+                </div>
+
 
             </div>
         );

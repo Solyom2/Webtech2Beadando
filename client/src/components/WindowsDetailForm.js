@@ -49,40 +49,40 @@ class WindowsDetailForm extends React.Component{
                     </div>
                 </header>
 
-                <p className="bg-primary text-center h3">Windows deatils</p>
+                <p className="bg-primary text-center h3">Windows details</p>
 
                 <p className="bg-info text-center font-italic h4">Number of orders: {OrderStore._submittedOrder.order.windows.length}</p>
 
                 <form id="windowform">
-                <div className="row">Window height
+                <div className="row p-1 justify-content-center">Window height:
                     <input type="number" onChange={(event) => {
                         this.state.windowlength = event.target.value;
                         this.setState({windowlength: this.state.windowlength})
                     }}/>
                 </div>
 
-                <div className="row">Window width
+                <div className="row p-1 justify-content-center">Window width:
                     <input type="number" onChange={(event) => {
                         this.state.windowwidth = event.target.value;
                         this.setState({windowwidth: this.state.windowwidth})
                     }}/>
                 </div>
 
-                <div className="row">Shutter type
+                <div className="row p-1 justify-content-center">Shutter type:
                     <input type="text" onChange={(event) => {
                         this.state.shuttertype = event.target.value;
                         this.setState({shuttertype: this.state.shuttertype})
                     }}/>
                 </div>
 
-                <div className="row">Shutter color
+                <div className="row p-1 justify-content-center">Shutter color:
                     <input type="text" required="true"  onChange={(event) => {
                         this.state.shuttercolor = event.target.value;
                         this.setState({shuttercolor: this.state.shuttercolor})
                     }}/>
                 </div>
 
-                <div className="row">Quantity
+                <div className="row p-1 justify-content-center">Quantity:
                     <input type="number" onChange={(event) => {
                         this.state.quantity = event.target.value;
                         this.setState({quantity: this.state.quantity});
@@ -90,29 +90,35 @@ class WindowsDetailForm extends React.Component{
                     }}/>
                 </div>
                 </form>
+                
+                <div className="row justify-content-center p-1">
+                    <div className="col-2">
+                        <button
+                            onClick={() => {
+                                console.log(this.state);
+                                OrderStore._submittedOrder.order.windows.push(this.state);
+                                this.setState({windowlength: null,
+                                    windowwidth: null,
+                                    shuttertype: null,
+                                    shuttercolor: null,
+                                    quantity: null})
+                                document.getElementById("windowform").reset();
+                            }}
+                            className="btn-info">Add window
+                        </button>
+                    </div>
 
-                <button
-                    onClick={() => {
-                        console.log(this.state);
-                        OrderStore._submittedOrder.order.windows.push(this.state);
-                        this.setState({windowlength: null,
-                            windowwidth: null,
-                            shuttertype: null,
-                            shuttercolor: null,
-                            quantity: null})
-                        document.getElementById("windowform").reset();
-                    }}
-                    className="btn-info">Add window
-                </button>
-
-                <button
-                    onClick={() => {
-                        OrderActions.createOrder(OrderStore._submittedOrder);
-                        PageActions.showCustomerForm();
-                    }}
-                    className="btn btn-success">Submit order
-                </button>
-
+                    <div className="col-2">
+                        <button
+                            onClick={() => {
+                                OrderActions.createOrder(OrderStore._submittedOrder);
+                                PageActions.showCustomerForm();
+                            }}
+                            className="btn btn-success">Submit order
+                        </button>
+                    </div>
+                </div>
+                
             </div>
         );
     }

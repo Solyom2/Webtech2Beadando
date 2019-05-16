@@ -30,25 +30,27 @@ class UnfinishedOrderList extends React.Component {
 
                 <p className="bg-primary text-center h3">Orders to be completed</p>
 
-                <table className="bg-light table-bordered table-hover text-black-50">
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer name</th>
-                        <th>Customer address</th>
-                    </tr>
-                    {this.state.orders.map((i) => {
-                        return (
-                            <tr onClick={() => {
-                                OrderActions.listParts(i._id)
-                            }}>
-                                <td>{i._id}</td>
-                                <td>{i.customername}</td>
-                                <td>{i.address}</td>
-                            </tr>);
-                    })
-                    }
+                <div>
+                    <table className="bg-light table-bordered table-hover text-black-50 m-auto">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer name</th>
+                            <th>Customer address</th>
+                        </tr>
+                        {this.state.orders.map((i) => {
+                            return (
+                                <tr onClick={() => {
+                                    OrderActions.listParts(i._id)
+                                }}>
+                                    <td className="idTd">{i._id}</td>
+                                    <td>{i.customername}</td>
+                                    <td>{i.address}</td>
+                                </tr>);
+                        })
+                        }
+                    </table>
+                </div>
 
-                </table>
             </div>
         );
     }
